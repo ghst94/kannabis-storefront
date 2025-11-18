@@ -121,7 +121,10 @@ export const ExpressCartProvider = ({
     }
   }
 
-  const updateCart = async ({ updateData, shippingMethodData }) => {
+  const updateCart = async ({ updateData, shippingMethodData }: {
+    updateData?: HttpTypes.StoreUpdateCart
+    shippingMethodData?: HttpTypes.StoreAddCartShippingMethods
+  }) => {
     if (!updateData && !shippingMethodData) {
       return cart
     }
