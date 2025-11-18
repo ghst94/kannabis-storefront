@@ -47,9 +47,9 @@ export const AlgoliaProductSidebar = () => {
                 allSearchParams.min_price || allSearchParams.max_price
               )}
             />
-            <SizeFilter defaultOpen={Boolean(allSearchParams.size)} />
-            <ColorFilter defaultOpen={Boolean(allSearchParams.color)} />
-            <ConditionFilter defaultOpen={Boolean(allSearchParams.condition)} />
+            <WeightFilter defaultOpen={Boolean(allSearchParams.weight)} />
+            <StrainTypeFilter defaultOpen={Boolean(allSearchParams.strain_type)} />
+            <ProductTypeFilter defaultOpen={Boolean(allSearchParams.product_type)} />
           </div>
         </Modal>
       )}
@@ -57,27 +57,27 @@ export const AlgoliaProductSidebar = () => {
   ) : (
     <div>
       <PriceFilter />
-      <SizeFilter />
-      <ColorFilter />
-      <ConditionFilter />
+      <WeightFilter />
+      <StrainTypeFilter />
+      <ProductTypeFilter />
       {/* <RatingFilter /> */}
     </div>
   )
 }
 
-function ConditionFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
+function ProductTypeFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
   const { items } = useRefinementList({
     attribute: "variants.condition",
     limit: 100,
     operator: "or",
   })
-  const { updateFilters, isFilterActive } = useFilters("condition")
+  const { updateFilters, isFilterActive } = useFilters("product_type")
 
   const selectHandler = (option: string) => {
     updateFilters(option)
   }
   return (
-    <Accordion heading="Condition" defaultOpen={defaultOpen}>
+    <Accordion heading="Product Type" defaultOpen={defaultOpen}>
       <ul className="px-4">
         {items.map(({ label, count }) => (
           <li key={label} className="mb-4">
@@ -94,7 +94,7 @@ function ConditionFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
   )
 }
 
-function ColorFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
+function StrainTypeFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
   const { items } = useRefinementList({
     attribute: "variants.color",
     limit: 100,
@@ -102,28 +102,21 @@ function ColorFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
     escapeFacetValues: false,
     sortBy: ["isRefined", "count", "name"],
   })
-  const { updateFilters, isFilterActive } = useFilters("color")
+  const { updateFilters, isFilterActive } = useFilters("strain_type")
 
   const selectHandler = (option: string) => {
     updateFilters(option)
   }
   return (
-    <Accordion heading="Color" defaultOpen={defaultOpen}>
+    <Accordion heading="Strain Type" defaultOpen={defaultOpen}>
       <ul className="px-4">
         {items.map(({ label, count }) => (
-          <li key={label} className="mb-4 flex items-center justify-between">
+          <li key={label} className="mb-4">
             <FilterCheckboxOption
               checked={isFilterActive(label)}
               disabled={Boolean(!count)}
               onCheck={selectHandler}
               label={label}
-            />
-            <div
-              style={{ backgroundColor: label.toLowerCase() }}
-              className={cn(
-                "w-5 h-5 border border-primary rounded-xs",
-                Boolean(!label) && "opacity-30"
-              )}
             />
           </li>
         ))}
@@ -132,26 +125,26 @@ function ColorFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
   )
 }
 
-function SizeFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
+function WeightFilter({ defaultOpen = true }: { defaultOpen?: boolean }) {
   const { items } = useRefinementList({
     attribute: "variants.size",
     limit: 100,
     operator: "or",
   })
-  const { updateFilters, isFilterActive } = useFilters("size")
+  const { updateFilters, isFilterActive } = useFilters("weight")
 
-  const selectSizeHandler = (size: string) => {
-    updateFilters(size)
+  const selectWeightHandler = (weight: string) => {
+    updateFilters(weight)
   }
 
   return (
-    <Accordion heading="Size" defaultOpen={defaultOpen}>
+    <Accordion heading="Weight" defaultOpen={defaultOpen}>
       <ul className="grid grid-cols-4 mt-2 gap-2">
         {items.map(({ label }) => (
           <li key={label} className="mb-4">
             <Chip
               selected={isFilterActive(label)}
-              onSelect={() => selectSizeHandler(label)}
+              onSelect={() => selectWeightHandler(label)}
               value={label}
               className="w-full !justify-center !py-2 !font-normal"
             />

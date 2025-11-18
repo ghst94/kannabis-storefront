@@ -60,7 +60,7 @@ export const ParcelAccordionItems = ({
           </span>
         </p>
         <p className="label-md col-span-2 text-center px-2">
-          Shipping:{" "}
+          Delivery:{" "}
           <span className="text-primary font-semibold">
             {convertToLocale({ amount: order.shipping_total, currency_code })}
           </span>

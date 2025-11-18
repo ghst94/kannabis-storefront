@@ -4,23 +4,23 @@ import { CategoryCard } from "@/components/organisms"
 export const categories: { id: number; name: string; handle: string }[] = [
   {
     id: 1,
-    name: "Sneakers",
-    handle: "sneakers",
+    name: "Flower",
+    handle: "flower",
   },
   {
     id: 2,
-    name: "Sandals",
-    handle: "sandals",
+    name: "Edibles",
+    handle: "edibles",
   },
   {
     id: 3,
-    name: "Boots",
-    handle: "boots",
+    name: "Concentrates",
+    handle: "concentrates",
   },
   {
     id: 4,
-    name: "Sport",
-    handle: "sport",
+    name: "Vapes",
+    handle: "vapes",
   },
   {
     id: 5,

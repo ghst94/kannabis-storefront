@@ -14,7 +14,6 @@ import CountrySelector from "@/components/molecules/CountrySelector/CountrySelec
 import { listRegions } from "@/lib/data/regions"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
 import { MessageButton } from "@/components/molecules/MessageButton/MessageButton"
-import { SellNowButton } from "@/components/cells/SellNowButton/SellNowButton"
 
 export const Header = async () => {
   const user = await retrieveCustomer()
@@ -44,9 +43,6 @@ export const Header = async () => {
             parentCategories={parentCategories}
             childrenCategories={categories}
           />
-          <div className="hidden lg:block">
-            <SellNowButton />
-          </div>
         </div>
 
         {/* Center - Logo */}

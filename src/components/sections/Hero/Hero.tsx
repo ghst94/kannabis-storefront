@@ -12,28 +12,42 @@ type HeroProps = {
 export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
   return (
     <section className="w-full relative min-h-[70vh] lg:min-h-[85vh] flex items-end text-primary overflow-hidden">
-      {/* Full-width background image */}
-      <Image
-        src={decodeURIComponent(image)}
-        fill
-        alt={`Hero banner - ${heading}`}
-        className="object-cover"
-        priority
-        fetchPriority="high"
-        quality={90}
-        sizes="100vw"
-      />
+      {/* Gradient background with cannabis-inspired colors - with parallax effect */}
+      <div className="absolute inset-0 bg-gradient-to-br from-emerald-900 via-purple-900 to-black transform scale-110 transition-transform duration-[2000ms] ease-out"
+           style={{ transform: 'translateY(calc(var(--scroll) * 0.5px))' }} />
+
+      {/* Animated gradient overlay with enhanced animation */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-green-600/20 via-purple-600/20 to-pink-600/20"
+           style={{
+             animation: 'pulse 8s cubic-bezier(0.4, 0, 0.6, 1) infinite, float 6s ease-in-out infinite',
+           }} />
+
+      {/* Floating particles effect */}
+      <div className="absolute inset-0 opacity-20">
+        {[...Array(20)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute w-1 h-1 bg-emerald-400 rounded-full animate-float"
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 5}s`,
+              animationDuration: `${5 + Math.random() * 10}s`,
+            }}
+          />
+        ))}
+      </div>
 
       {/* Dark overlay for better text contrast */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-      {/* Content overlay */}
-      <div className="relative z-10 w-full container pb-12 lg:pb-16">
+      {/* Content overlay with fade-in animation */}
+      <div className="relative z-10 w-full container pb-12 lg:pb-16 animate-fadeInUp">
         <div className="max-w-[800px]">
-          <h1 className="display-md uppercase mb-6 text-white">
+          <h1 className="display-md uppercase mb-6 text-white animate-slideInLeft">
             {heading}
           </h1>
-          <p className="text-xl mb-10 text-neutral-200 max-w-[600px]">{paragraph}</p>
+          <p className="text-xl mb-10 text-neutral-200 max-w-[600px] animate-slideInLeft" style={{ animationDelay: '0.2s' }}>{paragraph}</p>
 
           {buttons.length > 0 && (
             <div className="flex gap-4 flex-wrap">

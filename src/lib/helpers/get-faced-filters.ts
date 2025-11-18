@@ -3,11 +3,11 @@ import { ReadonlyURLSearchParams } from "next/navigation"
 
 const getOption = (label: string) => {
   switch (label) {
-    case "size":
+    case "weight":
       return "variants.size"
-    case "color":
+    case "strain_type":
       return "variants.color"
-    case "condition":
+    case "product_type":
       return "variants.condition"
     case "rating":
       return "average_rating"

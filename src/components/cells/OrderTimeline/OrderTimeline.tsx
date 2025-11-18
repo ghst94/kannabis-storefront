@@ -1,7 +1,7 @@
 // OrderTimeline.tsx
 import { cn } from "@/lib/utils"
 
-type OrderStatus = "received" | "preparing" | "shipped" | "delivered"
+type OrderStatus = "received" | "preparing" | "out for delivery" | "delivered"
 
 interface OrderTimelineProps {
   currentStatus: OrderStatus
@@ -11,7 +11,7 @@ export const OrderTimeline = ({ currentStatus }: OrderTimelineProps) => {
   const statuses: OrderStatus[] = [
     "received",
     "preparing",
-    "shipped",
+    "out for delivery",
     "delivered",
   ]
   const currentIndex = statuses.findIndex((status) => status === currentStatus)

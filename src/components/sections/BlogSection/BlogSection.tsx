@@ -4,29 +4,29 @@ import { BlogCard } from '@/components/organisms';
 export const blogPosts: BlogPost[] = [
   {
     id: 1,
-    title: "Summer's Most Elegant Accessories",
+    title: "The Ultimate Guide to Cannabis Terpenes",
     excerpt:
-      "Discover this season's most sophisticated accessories that blend timeless elegance with modern design.",
+      "Discover how terpenes influence aroma, flavor, and effects. Learn to identify profiles that match your preferences.",
     image: '/images/blog/post-1.jpg',
-    category: 'ACCESSORIES',
+    category: 'EDUCATION',
     href: '#',
   },
   {
     id: 2,
-    title: 'The Season’s Hottest Trends',
+    title: 'Top Strains for Relaxation & Sleep',
     excerpt:
-      'From bold colors to nostalgic silhouettes, explore the must-have looks defining this season’s fashion narrative.',
+      'From classic indicas to CBD-rich hybrids, explore the best strains for unwinding after a long day.',
     image: '/images/blog/post-2.jpg',
-    category: 'STYLE GUIDE',
+    category: 'STRAIN GUIDE',
     href: '#',
   },
   {
     id: 3,
-    title: 'Minimalist Outerwear Trends',
+    title: 'Edibles 101: Dosing & Effects',
     excerpt:
-      'Explore the latest minimalist outerwear pieces that combine functionality with clean aesthetics.',
+      'Master the art of cannabis edibles with our comprehensive guide to proper dosing, timing, and choosing the right products.',
     image: '/images/blog/post-3.jpg',
-    category: 'TRENDS',
+    category: 'GUIDE',
     href: '#',
   },
 ];
@@ -36,7 +36,7 @@ export function BlogSection() {
     <section className='bg-tertiary container'>
       <div className='flex items-center justify-between mb-12'>
         <h2 className='heading-lg text-tertiary'>
-          STAY UP TO DATE
+          CANNABIS KNOWLEDGE HUB
         </h2>
       </div>
       <div className='grid grid-cols-1 lg:grid-cols-3'>
