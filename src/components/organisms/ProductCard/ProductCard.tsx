@@ -28,67 +28,69 @@ export const ProductCard = ({
   return (
     <div
       className={clsx(
-        "relative group border rounded-sm flex flex-col justify-between p-1 w-full lg:w-[calc(25%-1rem)] min-w-[250px]"
+        "relative group flex flex-col w-full lg:w-[calc(25%-1rem)] min-w-[250px] overflow-hidden transition-all duration-500 hover:scale-[1.02]"
       )}
     >
-      <div className="relative w-full h-full bg-primary aspect-square">
-        <LocalizedClientLink
-          href={`/products/${product.handle}`}
-          aria-label={`View ${productName}`}
-          title={`View ${productName}`}
-        >
-          <div className="overflow-hidden rounded-sm w-full h-full flex justify-center align-center ">
-            {product.thumbnail ? (
-              <Image
-                priority
-                fetchPriority="high"
-                src={decodeURIComponent(product.thumbnail)}
-                alt={`${productName} image`}
-                width={100}
-                height={100}
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                className="object-cover aspect-square w-full object-center h-full lg:group-hover:-mt-14 transition-all duration-300 rounded-xs"
-              />
-            ) : (
-              <Image
-                priority
-                fetchPriority="high"
-                src="/images/placeholder.svg"
-                alt={`${productName} image placeholder`}
-                width={100}
-                height={100}
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-              />
-            )}
+      {/* Image Container */}
+      <LocalizedClientLink
+        href={`/products/${product.handle}`}
+        aria-label={`View ${productName}`}
+        title={`View ${productName}`}
+        className="relative w-full aspect-square overflow-hidden bg-neutral-900"
+      >
+        <div className="w-full h-full relative">
+          {product.thumbnail ? (
+            <Image
+              priority
+              fetchPriority="high"
+              src={decodeURIComponent(product.thumbnail)}
+              alt={`${productName} image`}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+          ) : (
+            <Image
+              priority
+              fetchPriority="high"
+              src="/images/placeholder.svg"
+              alt={`${productName} image placeholder`}
+              fill
+              sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover"
+            />
+          )}
+
+          {/* Overlay on hover */}
+          <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-all duration-300" />
+
+          {/* "Shop Now" button - appears on hover */}
+          <div className="absolute bottom-0 left-0 right-0 translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+            <Button className="w-full bg-white text-black hover:bg-neutral-200 uppercase font-bold py-4 tracking-wide">
+              Shop Now
+            </Button>
           </div>
-        </LocalizedClientLink>
-        <LocalizedClientLink
-          href={`/products/${product.handle}`}
-          aria-label={`See more about ${productName}`}
-          title={`See more about ${productName}`}
-        >
-          <Button className="absolute rounded-sm bg-action text-action-on-primary h-auto lg:h-[48px] lg:group-hover:block hidden w-full uppercase bottom-1 z-10">
-            See More
-          </Button>
-        </LocalizedClientLink>
-      </div>
+        </div>
+      </LocalizedClientLink>
+
+      {/* Product Info */}
       <LocalizedClientLink
         href={`/products/${product.handle}`}
         aria-label={`Go to ${productName} page`}
         title={`Go to ${productName} page`}
+        className="pt-4 pb-2"
       >
-        <div className="flex justify-between p-4">
-          <div className="w-full">
-            <h3 className="heading-sm truncate">{product.title}</h3>
-            <div className="flex items-center gap-2 mt-2">
-              <p className="font-medium">{cheapestPrice?.calculated_price}</p>
-              {cheapestPrice?.calculated_price !==
-                cheapestPrice?.original_price && (
-                <p className="text-sm text-gray-500 line-through">
-                  {cheapestPrice?.original_price}
-                </p>
-              )}
-            </div>
+        <div className="space-y-2">
+          <h3 className="heading-sm uppercase truncate group-hover:text-neutral-300 transition-colors">
+            {product.title}
+          </h3>
+          <div className="flex items-center gap-3">
+            <p className="font-bold text-lg">{cheapestPrice?.calculated_price}</p>
+            {cheapestPrice?.calculated_price !== cheapestPrice?.original_price && (
+              <p className="text-sm text-neutral-500 line-through">
+                {cheapestPrice?.original_price}
+              </p>
+            )}
           </div>
         </div>
       </LocalizedClientLink>

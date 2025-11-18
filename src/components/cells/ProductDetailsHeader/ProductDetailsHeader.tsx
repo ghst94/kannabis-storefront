@@ -13,6 +13,8 @@ import { WishlistButton } from "../WishlistButton/WishlistButton"
 import { Wishlist } from "@/types/wishlist"
 import { toast } from "@/lib/helpers/toast"
 import { useCartContext } from "@/components/providers"
+import { useExpressCart } from "@/providers"
+import { useRouter } from "next/navigation"
 
 const optionsAsKeymap = (
   variantOptions: HttpTypes.StoreProductVariant["options"]
@@ -42,7 +44,10 @@ export const ProductDetailsHeader = ({
   wishlist?: Wishlist[]
 }) => {
   const { onAddToCart, cart } = useCartContext()
+  const { addToCart: expressAddToCart } = useExpressCart()
+  const router = useRouter()
   const [isAdding, setIsAdding] = useState(false)
+  const [isBuyingNow, setIsBuyingNow] = useState(false)
   const { allSearchParams } = useGetAllSearchParams()
 
   const { cheapestVariant, cheapestPrice } = getProductPrice({
@@ -127,6 +132,25 @@ export const ProductDetailsHeader = ({
     }
   }
 
+  // buy now - add to express cart and navigate to checkout
+  const handleBuyNow = async () => {
+    if (!variantId || !hasAnyPrice) return null
+
+    setIsBuyingNow(true)
+
+    try {
+      await expressAddToCart(variantId, 1)
+      router.push(`/${locale}/checkout`)
+    } catch (error) {
+      toast.error({
+        title: "Error processing purchase",
+        description: "Unable to proceed to checkout. Please try again.",
+      })
+    } finally {
+      setIsBuyingNow(false)
+    }
+  }
+
   return (
     <div className="border rounded-sm p-5">
       <div className="flex justify-between">
@@ -173,13 +197,28 @@ export const ProductDetailsHeader = ({
         onClick={handleAddToCart}
         disabled={!variantStock || !variantHasPrice || !hasAnyPrice}
         loading={isAdding}
-        className="w-full uppercase mb-4 py-3 flex justify-center"
+        className="w-full uppercase mb-3 py-3 flex justify-center"
         size="large"
       >
         {!hasAnyPrice
           ? "NOT AVAILABLE IN YOUR REGION"
           : variantStock && variantHasPrice
           ? "ADD TO CART"
+          : "OUT OF STOCK"}
+      </Button>
+      {/* Buy Now - Express Checkout */}
+      <Button
+        onClick={handleBuyNow}
+        disabled={!variantStock || !variantHasPrice || !hasAnyPrice}
+        loading={isBuyingNow}
+        className="w-full uppercase mb-4 py-3 flex justify-center bg-action-secondary hover:bg-action-secondary/90"
+        size="large"
+        variant="tonal"
+      >
+        {!hasAnyPrice
+          ? "NOT AVAILABLE IN YOUR REGION"
+          : variantStock && variantHasPrice
+          ? "BUY NOW"
           : "OUT OF STOCK"}
       </Button>
       {/* Seller message */}

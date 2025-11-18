@@ -5,54 +5,89 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Typography */
+/* RTFKT-Style Smooth Animations */
+@layer base {
+  * {
+    @apply transition-colors duration-200;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-primary text-primary antialiased;
+  }
+}
+
+@layer utilities {
+  /* Smooth transitions for interactive elements */
+  .transition-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  .transition-smooth-slow {
+    @apply transition-all duration-500 ease-in-out;
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    @apply hover:-translate-y-1 transition-transform duration-300;
+  }
+
+  .hover-scale {
+    @apply hover:scale-105 transition-transform duration-300;
+  }
+}
+
+/* Typography - RTFKT Bold Style */
 .text-xl {
-  @apply font-light tracking-normal;
+  @apply font-normal tracking-tight;
 }
 .text-lg {
-  @apply text-base font-light tracking-normal;
+  @apply text-base font-normal tracking-tight;
 }
 .text-md {
-  @apply text-[14px] leading-[22px] font-light tracking-normal;
+  @apply text-[14px] leading-[22px] font-normal tracking-tight;
 }
 .text-sm {
-  @apply text-[12px] font-light tracking-normal;
+  @apply text-[12px] font-normal tracking-tight;
 }
 
 .label-sm {
-  @apply text-[12px] leading-[20px] font-normal tracking-normal;
+  @apply text-[12px] leading-[20px] font-medium tracking-wide uppercase;
 }
 .label-md {
-  @apply text-[14px] leading-[22px] font-normal tracking-normal;
+  @apply text-[14px] leading-[22px] font-medium tracking-wide uppercase;
 }
 .label-lg {
-  @apply text-[16px] leading-[24px] font-semibold tracking-normal;
+  @apply text-[16px] leading-[24px] font-bold tracking-wide uppercase;
 }
 .label-xl {
-  @apply text-[20px] leading-[28px] font-semibold tracking-normal;
+  @apply text-[20px] leading-[28px] font-bold tracking-wide uppercase;
 }
 
 .heading-xs {
-  @apply text-[14px] leading-[22px] font-medium tracking-normal;
+  @apply text-[14px] leading-[22px] font-bold tracking-tight;
 }
 .heading-sm {
-  @apply text-[16px] leading-[24px] font-medium tracking-normal;
+  @apply text-[16px] leading-[24px] font-bold tracking-tight;
 }
 .heading-md {
-  @apply text-[24px] leading-[32px] font-medium tracking-normal max-md:text-[20px] max-md:leading-[28px];
+  @apply text-[24px] leading-[32px] font-bold tracking-tight max-md:text-[20px] max-md:leading-[28px];
 }
 .heading-lg {
-  @apply text-[32px] leading-[40px] font-medium tracking-normal max-md:text-[24px] max-md:leading-[32px];
+  @apply text-[32px] leading-[40px] font-bold tracking-tighter max-md:text-[24px] max-md:leading-[32px];
 }
 .heading-xl {
-  @apply text-[40px] leading-[48px] font-medium tracking-normal max-md:text-[32px] max-md:leading-[40px];
+  @apply text-[40px] leading-[48px] font-bold tracking-tighter max-md:text-[32px] max-md:leading-[40px];
 }
 
 .display-sm {
-  @apply text-[56px] leading-[64px] font-medium tracking-normal max-md:text-[32px] max-md:leading-[40px];
+  @apply text-[56px] leading-[64px] font-bold tracking-tighter max-md:text-[32px] max-md:leading-[40px];
 }
 .display-md {
-  @apply text-[64px] leading-[72px] font-medium tracking-normal max-md:text-[40px] max-md:leading-[48px];
+  @apply text-[64px] leading-[72px] font-bold tracking-tighter max-md:text-[40px] max-md:leading-[48px];
 }
 .container {
   @apply px-4 md:px-5 max-w-full w-full lg:py-8 py-4 lg:px-8;

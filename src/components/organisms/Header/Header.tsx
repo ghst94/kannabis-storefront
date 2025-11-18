@@ -36,9 +36,10 @@ export const Header = async () => {
   }
 
   return (
-    <header>
-      <div className="flex py-2 lg:px-8 px-4">
-        <div className="flex items-center lg:w-1/3">
+    <header className="sticky top-0 z-50 bg-primary/95 backdrop-blur-md border-b border-neutral-800 transition-all duration-300">
+      <div className="flex py-4 lg:px-8 px-4">
+        {/* Left Section */}
+        <div className="flex items-center lg:w-1/3 gap-4">
           <MobileNavbar
             parentCategories={parentCategories}
             childrenCategories={categories}
@@ -47,35 +48,47 @@ export const Header = async () => {
             <SellNowButton />
           </div>
         </div>
+
+        {/* Center - Logo */}
         <div className="flex lg:justify-center lg:w-1/3 items-center pl-4 lg:pl-0">
-          <LocalizedClientLink href="/" className="text-2xl font-bold">
+          <LocalizedClientLink
+            href="/"
+            className="transition-opacity hover:opacity-80"
+          >
             <Image
               src="/Logo.svg"
               width={126}
               height={40}
               alt="Logo"
               priority
+              className="brightness-0 invert"
             />
           </LocalizedClientLink>
         </div>
-        <div className="flex items-center justify-end gap-2 lg:gap-4 w-full lg:w-1/3 py-2">
+
+        {/* Right Section */}
+        <div className="flex items-center justify-end gap-3 lg:gap-6 w-full lg:w-1/3">
           <CountrySelector regions={regions} />
           {user && <MessageButton />}
           <UserDropdown user={user} />
           {user && (
-            <LocalizedClientLink href="/user/wishlist" className="relative">
+            <LocalizedClientLink
+              href="/user/wishlist"
+              className="relative hover:text-neutral-300 transition-colors"
+            >
               <HeartIcon size={20} />
               {Boolean(wishlistCount) && (
-                <Badge className="absolute -top-2 -right-2 w-4 h-4 p-0">
+                <Badge className="absolute -top-2 -right-2 w-4 h-4 p-0 bg-white text-black">
                   {wishlistCount}
                 </Badge>
               )}
             </LocalizedClientLink>
           )}
-
           <CartDropdown />
         </div>
       </div>
+
+      {/* Navigation Bar */}
       <Navbar categories={categories} />
     </header>
   )
