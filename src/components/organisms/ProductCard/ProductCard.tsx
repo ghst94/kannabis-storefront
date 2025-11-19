@@ -27,10 +27,10 @@ export const ProductCard = ({
 
   // Extract cannabis-specific metadata (you can customize these fields in Medusa admin)
   const metadata = api_product.metadata || {}
-  const thc = metadata.thc_percentage || null
-  const cbd = metadata.cbd_percentage || null
-  const strainType = metadata.strain_type || null // "Indica", "Sativa", "Hybrid"
-  const effects = metadata.effects || null // e.g., "Relaxing, Happy, Euphoric"
+  const thc = metadata.thc_percentage ? String(metadata.thc_percentage) : null
+  const cbd = metadata.cbd_percentage ? String(metadata.cbd_percentage) : null
+  const strainType = metadata.strain_type ? String(metadata.strain_type) : null // "Indica", "Sativa", "Hybrid"
+  const effects = metadata.effects ? String(metadata.effects) : null // e.g., "Relaxing, Happy, Euphoric"
 
   return (
     <div
