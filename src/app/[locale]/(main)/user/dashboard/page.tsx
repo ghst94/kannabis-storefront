@@ -220,7 +220,7 @@ export default async function DashboardPage({
               <h3 className="text-white font-barlow font-bold text-lg mb-2">Cannabis Consumption Tip</h3>
               <p className="text-zinc-300 text-sm">
                 Start low and go slow. Wait at least 2 hours before consuming more edibles to gauge the full effect.
-                For flower, remember that THC content isn't everything – terpene profiles contribute significantly to the experience.
+                For flower, remember that THC content isn&apos;t everything – terpene profiles contribute significantly to the experience.
               </p>
             </div>
           </div>
