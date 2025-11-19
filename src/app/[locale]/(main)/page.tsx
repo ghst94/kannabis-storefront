@@ -166,8 +166,7 @@ export default async function Home({
         heading="Kannabis Same-Day Delivery"
         paragraph="Discover top-quality strains, brands and vibes, right at your fingertips."
         buttons={[
-          { label: "Sign In", path: "/user" },
-          { label: "Sign Up", path: "/user/register" },
+          { label: "SHOP NOW", path: "/categories" },
         ]}
       />
 
