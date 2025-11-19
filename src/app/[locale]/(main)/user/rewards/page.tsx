@@ -1,6 +1,9 @@
 import { retrieveCustomer } from "@/lib/data/customer"
 import { redirect } from "next/navigation"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
+import { getMockLoyaltyData, REWARD_TIERS, AVAILABLE_REWARDS } from "@/lib/loyalty/mock-data"
+import TierBadge from "@/components/loyalty/TierBadge"
+import ActivityTimeline from "@/components/loyalty/ActivityTimeline"
 
 export default async function RewardsPage({
   params,
@@ -14,70 +17,8 @@ export default async function RewardsPage({
     redirect(`/${locale}/user`)
   }
 
-  // Mock rewards data - integrate with your actual rewards system
-  const rewardsPoints = Number(customer?.metadata?.rewards_points) || 0
-  const lifetimePoints = Number(customer?.metadata?.lifetime_points) || 0
-  const rewardsTier = rewardsPoints >= 1000 ? 'Gold' : rewardsPoints >= 500 ? 'Silver' : 'Bronze'
-
-  const availableRewards = [
-    {
-      id: 1,
-      name: "$5 Off Your Next Order",
-      points: 100,
-      icon: "💵",
-      description: "Get $5 off any order over $50",
-      available: rewardsPoints >= 100,
-    },
-    {
-      id: 2,
-      name: "Free Pre-Roll",
-      points: 250,
-      icon: "🚬",
-      description: "Choose any premium pre-roll on us",
-      available: rewardsPoints >= 250,
-    },
-    {
-      id: 3,
-      name: "$10 Off Your Next Order",
-      points: 500,
-      icon: "💰",
-      description: "Get $10 off any order over $100",
-      available: rewardsPoints >= 500,
-    },
-    {
-      id: 4,
-      name: "Free Edible Pack",
-      points: 750,
-      icon: "🍪",
-      description: "Choose any edible pack on us",
-      available: rewardsPoints >= 750,
-    },
-    {
-      id: 5,
-      name: "$25 Off Your Next Order",
-      points: 1000,
-      icon: "💎",
-      description: "Get $25 off any order",
-      available: rewardsPoints >= 1000,
-    },
-  ]
-
-  const recentActivity = [
-    {
-      id: 1,
-      type: "earned",
-      points: 50,
-      description: "Order #12345 completed",
-      date: new Date().toISOString(),
-    },
-    {
-      id: 2,
-      type: "earned",
-      points: 25,
-      description: "Product review bonus",
-      date: new Date(Date.now() - 86400000).toISOString(),
-    },
-  ]
+  // Get enhanced loyalty data
+  const loyaltyData = getMockLoyaltyData(customer)
 
   return (
     <div className="w-full bg-zinc-900 min-h-screen py-8">
@@ -101,7 +42,7 @@ export default async function RewardsPage({
               <h3 className="font-barlow font-bold text-lg">Current Points</h3>
               <div className="text-4xl">🌟</div>
             </div>
-            <p className="text-5xl font-barlow font-black mb-2">{rewardsPoints}</p>
+            <p className="text-5xl font-barlow font-black mb-2">{loyaltyData.currentPoints}</p>
             <p className="text-black/70 text-sm">Available to redeem</p>
           </div>
 
@@ -111,7 +52,7 @@ export default async function RewardsPage({
               <h3 className="font-barlow font-bold text-lg text-white">Lifetime Earned</h3>
               <div className="text-4xl">💫</div>
             </div>
-            <p className="text-5xl font-barlow font-black text-white mb-2">{lifetimePoints}</p>
+            <p className="text-5xl font-barlow font-black text-white mb-2">{loyaltyData.lifetimePoints}</p>
             <p className="text-zinc-400 text-sm">Total points earned</p>
           </div>
 
@@ -119,13 +60,13 @@ export default async function RewardsPage({
           <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-barlow font-bold text-lg text-white">Member Tier</h3>
-              <div className="text-4xl">
-                {rewardsTier === 'Gold' ? '👑' : rewardsTier === 'Silver' ? '⭐' : '🌱'}
-              </div>
+              <div className="text-4xl">{loyaltyData.currentTier.icon}</div>
             </div>
-            <p className="text-5xl font-barlow font-black text-lime-500 mb-2">{rewardsTier}</p>
+            <p className="text-5xl font-barlow font-black text-lime-500 mb-2">{loyaltyData.currentTier.name}</p>
             <p className="text-zinc-400 text-sm">
-              {rewardsTier === 'Gold' ? 'Elite status' : `${1000 - rewardsPoints} pts to Gold`}
+              {loyaltyData.nextTier
+                ? `${loyaltyData.pointsToNextTier} pts to ${loyaltyData.nextTier.name}`
+                : 'Maximum tier achieved!'}
             </p>
           </div>
         </div>
@@ -134,21 +75,25 @@ export default async function RewardsPage({
         <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6 mb-8">
           <h2 className="text-xl font-barlow font-black text-white uppercase mb-4">How to Earn Points</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 p-4 bg-zinc-900 rounded-lg">
               <div className="text-2xl">🛍️</div>
               <div>
                 <p className="text-white font-bold mb-1">Make Purchases</p>
-                <p className="text-zinc-400 text-sm">Earn 1 point per $1 spent</p>
+                <p className="text-zinc-400 text-sm">
+                  Earn {loyaltyData.currentTier.name === 'Master' ? '2x' :
+                        loyaltyData.currentTier.name === 'Cultivator' ? '1.5x' :
+                        loyaltyData.currentTier.name === 'Grower' ? '1.25x' : '1x'} points per $1 spent
+                </p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 p-4 bg-zinc-900 rounded-lg">
               <div className="text-2xl">⭐</div>
               <div>
                 <p className="text-white font-bold mb-1">Write Reviews</p>
                 <p className="text-zinc-400 text-sm">Get 25 points per product review</p>
               </div>
             </div>
-            <div className="flex items-start gap-3">
+            <div className="flex items-start gap-3 p-4 bg-zinc-900 rounded-lg">
               <div className="text-2xl">🎂</div>
               <div>
                 <p className="text-white font-bold mb-1">Birthday Bonus</p>
@@ -158,77 +103,128 @@ export default async function RewardsPage({
           </div>
         </div>
 
-        {/* Available Rewards */}
+        {/* Rewards Tiers Showcase */}
         <div className="mb-8">
-          <h2 className="text-2xl font-barlow font-black text-white uppercase mb-6">Available Rewards</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {availableRewards.map((reward) => (
-              <div
-                key={reward.id}
-                className={`bg-zinc-800 border rounded-lg p-6 transition-all duration-300 ${
-                  reward.available
-                    ? 'border-lime-500 hover:shadow-lg hover:shadow-lime-500/20'
-                    : 'border-zinc-700 opacity-60'
-                }`}
-              >
-                <div className="text-5xl mb-4">{reward.icon}</div>
-                <h3 className="text-white font-barlow font-bold text-lg mb-2">{reward.name}</h3>
-                <p className="text-zinc-400 text-sm mb-4">{reward.description}</p>
-                <div className="flex items-center justify-between">
-                  <span className="text-lime-500 font-bold text-lg">{reward.points} pts</span>
-                  {reward.available ? (
-                    <button className="px-4 py-2 bg-lime-500 text-black font-bold rounded-full hover:bg-lime-400 transition-colors text-sm">
-                      Redeem
-                    </button>
-                  ) : (
-                    <span className="px-4 py-2 bg-zinc-700 text-zinc-400 font-bold rounded-full text-sm">
-                      Locked
-                    </span>
+          <h2 className="text-2xl font-barlow font-black text-white uppercase mb-6">Membership Tiers</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {REWARD_TIERS.map((tier) => {
+              const isCurrentTier = tier.name === loyaltyData.currentTier.name
+              const isLocked = tier.minPoints > loyaltyData.currentPoints
+
+              return (
+                <div
+                  key={tier.name}
+                  className={`relative rounded-lg p-6 transition-all duration-300 ${
+                    isCurrentTier
+                      ? 'ring-2 ring-lime-500 scale-105'
+                      : isLocked
+                      ? 'opacity-60'
+                      : ''
+                  }`}
+                >
+                  {isCurrentTier && (
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-lime-500 text-black text-xs font-bold rounded-full">
+                      CURRENT TIER
+                    </div>
+                  )}
+                  <TierBadge tier={tier} size="sm" showBenefits />
+                  {isLocked && (
+                    <div className="absolute inset-0 bg-zinc-900/80 rounded-lg flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-4xl mb-2">🔒</div>
+                        <p className="text-white font-bold text-sm">
+                          {tier.minPoints - loyaltyData.currentPoints} more points
+                        </p>
+                      </div>
+                    </div>
                   )}
                 </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 
-        {/* Recent Activity */}
-        <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
-          <h2 className="text-xl font-barlow font-black text-white uppercase mb-4">Recent Activity</h2>
-          <div className="space-y-3">
-            {recentActivity.map((activity) => (
-              <div key={activity.id} className="flex items-center justify-between p-4 bg-zinc-900 rounded-lg">
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-full ${
-                    activity.type === 'earned' ? 'bg-lime-500/20' : 'bg-red-500/20'
-                  }`}>
-                    {activity.type === 'earned' ? (
-                      <svg className="w-5 h-5 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                      </svg>
-                    ) : (
-                      <svg className="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
-                      </svg>
-                    )}
-                  </div>
-                  <div>
-                    <p className="text-white font-bold text-sm">{activity.description}</p>
-                    <p className="text-zinc-400 text-xs">
-                      {new Date(activity.date).toLocaleDateString('en-US', {
-                        month: 'short',
-                        day: 'numeric',
-                        year: 'numeric'
-                      })}
-                    </p>
+        {/* Available Rewards */}
+        <div className="mb-8">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-2xl font-barlow font-black text-white uppercase">Available Rewards</h2>
+            <div className="flex items-center gap-2 text-zinc-400 text-sm">
+              <span className="text-lime-500 font-bold">{loyaltyData.availableRewards.length}</span>
+              <span>rewards unlocked</span>
+            </div>
+          </div>
+
+          {loyaltyData.availableRewards.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+              {loyaltyData.availableRewards.map((reward) => (
+                <div
+                  key={reward.id}
+                  className="bg-zinc-800 border-2 border-lime-500 rounded-lg p-6 transition-all duration-300 hover:shadow-lg hover:shadow-lime-500/20"
+                >
+                  <div className="text-5xl mb-4">{reward.icon}</div>
+                  <h3 className="text-white font-barlow font-bold text-lg mb-2">{reward.name}</h3>
+                  <p className="text-zinc-400 text-sm mb-4">{reward.description}</p>
+                  <div className="flex items-center justify-between">
+                    <span className="text-lime-500 font-bold text-lg">{reward.points} pts</span>
+                    <button className="px-4 py-2 bg-lime-500 text-black font-bold rounded-full hover:bg-lime-400 transition-colors text-sm">
+                      Redeem
+                    </button>
                   </div>
                 </div>
-                <span className={`font-bold ${
-                  activity.type === 'earned' ? 'text-lime-500' : 'text-red-500'
-                }`}>
-                  {activity.type === 'earned' ? '+' : '-'}{activity.points} pts
-                </span>
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-12 bg-zinc-800 border border-zinc-700 rounded-lg mb-6">
+              <div className="text-zinc-600 text-6xl mb-4">🎁</div>
+              <p className="text-zinc-400 mb-2">No rewards available yet</p>
+              <p className="text-zinc-500 text-sm">Keep shopping to earn more points!</p>
+            </div>
+          )}
+
+          {/* Locked Rewards */}
+          {loyaltyData.lockedRewards.length > 0 && (
+            <>
+              <h3 className="text-xl font-barlow font-black text-white uppercase mb-4">Locked Rewards</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {loyaltyData.lockedRewards.map((reward) => (
+                  <div
+                    key={reward.id}
+                    className="relative bg-zinc-800 border border-zinc-700 rounded-lg p-6 opacity-60"
+                  >
+                    <div className="text-5xl mb-4 grayscale">{reward.icon}</div>
+                    <h3 className="text-white font-barlow font-bold text-lg mb-2">{reward.name}</h3>
+                    <p className="text-zinc-400 text-sm mb-4">{reward.description}</p>
+                    <div className="flex items-center justify-between">
+                      <span className="text-zinc-500 font-bold text-lg">{reward.points} pts</span>
+                      <span className="px-4 py-2 bg-zinc-700 text-zinc-400 font-bold rounded-full text-sm">
+                        Locked
+                      </span>
+                    </div>
+                    <div className="absolute top-4 right-4 text-2xl">🔒</div>
+                  </div>
+                ))}
               </div>
-            ))}
+            </>
+          )}
+        </div>
+
+        {/* Activity History */}
+        <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+          <h2 className="text-xl font-barlow font-black text-white uppercase mb-6">Activity History</h2>
+          <ActivityTimeline activities={loyaltyData.activities} limit={20} />
+        </div>
+
+        {/* Info Banner */}
+        <div className="mt-8 bg-gradient-to-r from-lime-500/10 to-lime-500/5 border border-lime-500/30 rounded-lg p-6">
+          <div className="flex items-start gap-4">
+            <div className="text-4xl">💡</div>
+            <div className="flex-1">
+              <h3 className="text-white font-barlow font-bold text-lg mb-2">Points Never Expire</h3>
+              <p className="text-zinc-300 text-sm">
+                Your loyalty points never expire as long as your account remains active.
+                Keep earning, keep redeeming, and enjoy exclusive benefits as you climb through our membership tiers!
+              </p>
+            </div>
           </div>
         </div>
       </div>

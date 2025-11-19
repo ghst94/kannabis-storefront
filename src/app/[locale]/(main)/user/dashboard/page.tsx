@@ -1,9 +1,12 @@
 import { retrieveCustomer } from "@/lib/data/customer"
-import { retrieveCart } from "@/lib/data/cart"
 import { listOrders } from "@/lib/data/orders"
 import { redirect } from "next/navigation"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
 import { UserButton } from "@clerk/nextjs"
+import { getMockLoyaltyData, getCurrentTier, getNextTier } from "@/lib/loyalty/mock-data"
+import TierBadge from "@/components/loyalty/TierBadge"
+import PointsDisplay from "@/components/loyalty/PointsDisplay"
+import ActivityTimeline from "@/components/loyalty/ActivityTimeline"
 
 export default async function DashboardPage({
   params,
@@ -23,10 +26,10 @@ export default async function DashboardPage({
   ) || []
   const recentOrders = orders?.slice(0, 3) || []
 
-  // Mock rewards data - integrate with your actual rewards system
-  const rewardsPoints = Number(customer?.metadata?.rewards_points) || 0
-  const nextRewardAt = 500
-  const rewardsProgress = (rewardsPoints / nextRewardAt) * 100
+  // Get enhanced loyalty data
+  const loyaltyData = getMockLoyaltyData(customer)
+  const currentTier = getCurrentTier(loyaltyData.currentPoints)
+  const nextTierInfo = getNextTier(loyaltyData.currentPoints)
 
   return (
     <div className="w-full bg-zinc-900 min-h-screen py-8">
@@ -49,6 +52,59 @@ export default async function DashboardPage({
           />
         </div>
 
+        {/* Loyalty Status Banner */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Current Points */}
+          <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+            <PointsDisplay points={loyaltyData.currentPoints} label="Available Points" animated />
+            <LocalizedClientLink
+              href="/user/rewards"
+              className="mt-4 block w-full text-center px-4 py-2 bg-lime-500 hover:bg-lime-400 text-black font-bold rounded-lg transition-colors"
+            >
+              Redeem Rewards
+            </LocalizedClientLink>
+          </div>
+
+          {/* Current Tier */}
+          <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+            <p className="text-zinc-400 text-sm font-bold uppercase mb-3">Your Status</p>
+            <TierBadge tier={currentTier} size="sm" />
+          </div>
+
+          {/* Next Tier Progress */}
+          <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+            <p className="text-zinc-400 text-sm font-bold uppercase mb-3">
+              {nextTierInfo.tier ? `Next: ${nextTierInfo.tier.name}` : 'Max Tier Reached!'}
+            </p>
+            {nextTierInfo.tier ? (
+              <>
+                <div className="flex items-end justify-between mb-3">
+                  <div>
+                    <p className="text-4xl font-barlow font-black text-lime-500">
+                      {loyaltyData.pointsToNextTier}
+                    </p>
+                    <p className="text-zinc-500 text-sm">points needed</p>
+                  </div>
+                  <div className="text-4xl">{nextTierInfo.tier.icon}</div>
+                </div>
+                <div className="w-full bg-zinc-700 rounded-full h-3">
+                  <div
+                    className="bg-gradient-to-r from-lime-500 to-lime-400 h-3 rounded-full transition-all duration-500"
+                    style={{
+                      width: `${((loyaltyData.currentPoints - currentTier.minPoints) / (nextTierInfo.tier.minPoints - currentTier.minPoints)) * 100}%`
+                    }}
+                  />
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-4">
+                <div className="text-6xl mb-2">👑</div>
+                <p className="text-white font-bold">You&apos;re at the top!</p>
+              </div>
+            )}
+          </div>
+        </div>
+
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Active Deliveries */}
@@ -69,30 +125,21 @@ export default async function DashboardPage({
             </div>
           </LocalizedClientLink>
 
-          {/* Rewards Points */}
-          <LocalizedClientLink href="/user/rewards">
-            <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6 hover:border-lime-500 transition-all duration-300 cursor-pointer group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="p-3 bg-lime-500/10 rounded-lg">
-                  <svg className="w-6 h-6 text-lime-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <span className="text-3xl font-barlow font-black text-white group-hover:text-lime-500 transition-colors">
-                  {rewardsPoints}
-                </span>
+          {/* Lifetime Points */}
+          <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="p-3 bg-yellow-500/10 rounded-lg">
+                <svg className="w-6 h-6 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+                </svg>
               </div>
-              <h3 className="text-white font-barlow font-bold text-lg mb-1">Rewards Points</h3>
-              <p className="text-zinc-400 text-sm">{nextRewardAt - rewardsPoints} to next reward</p>
-              {/* Progress bar */}
-              <div className="mt-3 w-full bg-zinc-700 rounded-full h-2">
-                <div
-                  className="bg-lime-500 h-2 rounded-full transition-all duration-500"
-                  style={{ width: `${rewardsProgress}%` }}
-                />
-              </div>
+              <span className="text-3xl font-barlow font-black text-white">
+                {loyaltyData.lifetimePoints}
+              </span>
             </div>
-          </LocalizedClientLink>
+            <h3 className="text-white font-barlow font-bold text-lg mb-1">Lifetime Points</h3>
+            <p className="text-zinc-400 text-sm">Total earned all-time</p>
+          </div>
 
           {/* Total Orders */}
           <LocalizedClientLink href="/user/orders">
@@ -113,10 +160,10 @@ export default async function DashboardPage({
           </LocalizedClientLink>
         </div>
 
-        {/* Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Three Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Recent Orders */}
-          <div className="bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+          <div className="lg:col-span-2 bg-zinc-800 border border-zinc-700 rounded-lg p-6">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-xl font-barlow font-black text-white uppercase">Recent Orders</h2>
               <LocalizedClientLink href="/user/orders" className="text-lime-500 hover:text-lime-400 text-sm font-bold">
@@ -210,6 +257,17 @@ export default async function DashboardPage({
               </LocalizedClientLink>
             </div>
           </div>
+        </div>
+
+        {/* Point Activity Timeline */}
+        <div className="mt-8 bg-zinc-800 border border-zinc-700 rounded-lg p-6">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-barlow font-black text-white uppercase">Recent Activity</h2>
+            <LocalizedClientLink href="/user/rewards" className="text-lime-500 hover:text-lime-400 text-sm font-bold">
+              View All →
+            </LocalizedClientLink>
+          </div>
+          <ActivityTimeline activities={loyaltyData.activities} limit={5} />
         </div>
 
         {/* Cannabis Education Banner */}
