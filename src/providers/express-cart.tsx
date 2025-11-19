@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useState, useEffect, useContext } from "react"
+import { createContext, useState, useEffect, useContext, useCallback } from "react"
 import { HttpTypes } from "@medusajs/types"
 import { sdk } from "@/lib/config"
 import { useRegion } from "./region"
@@ -33,6 +33,25 @@ export const ExpressCartProvider = ({
   const [cart, setCart] = useState<HttpTypes.StoreCart>()
   const { region } = useRegion()
 
+  const refreshCart = useCallback(async () => {
+    if (!region) {
+      return
+    }
+
+    try {
+      const { cart: dataCart } = await sdk.store.cart.create({
+        region_id: region.id,
+      })
+
+      localStorage.setItem("express_cart_id", dataCart.id)
+      setCart(dataCart)
+      return dataCart
+    } catch (error) {
+      console.error("Failed to create cart:", error)
+      throw error
+    }
+  }, [region])
+
   useEffect(() => {
     if (!region) {
       return
@@ -60,7 +79,7 @@ export const ExpressCartProvider = ({
           refreshCart()
         })
     }
-  }, [cart, region])
+  }, [cart, region, refreshCart])
 
   useEffect(() => {
     if (!cart || !region || cart.region_id === region.id) {
@@ -77,26 +96,7 @@ export const ExpressCartProvider = ({
       .catch((error) => {
         console.error("Failed to update cart region:", error)
       })
-  }, [region])
-
-  const refreshCart = async () => {
-    if (!region) {
-      return
-    }
-
-    try {
-      const { cart: dataCart } = await sdk.store.cart.create({
-        region_id: region.id,
-      })
-
-      localStorage.setItem("express_cart_id", dataCart.id)
-      setCart(dataCart)
-      return dataCart
-    } catch (error) {
-      console.error("Failed to create cart:", error)
-      throw error
-    }
-  }
+  }, [cart, region])
 
   const addToCart = async (variantId: string, quantity: number) => {
     const newCart = await refreshCart()

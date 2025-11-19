@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { Button } from "@/components/atoms"
 
 interface COAData {
@@ -228,10 +229,13 @@ export function COADisplay({ coa, productName }: COADisplayProps) {
               Scan for COA Details
             </h4>
             <div className="bg-white p-4 rounded-lg border-4 border-emerald-500">
-              <img
+              <Image
                 src={generateQRCode(coa.qrCodeData)}
                 alt="COA QR Code"
+                width={300}
+                height={300}
                 className="w-full h-auto"
+                unoptimized
               />
             </div>
             <p className="text-xs text-gray-600 text-center mt-4">

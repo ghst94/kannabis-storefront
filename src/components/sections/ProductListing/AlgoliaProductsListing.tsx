@@ -14,7 +14,7 @@ import { useSearchParams } from "next/navigation"
 import { getFacedFilters } from "@/lib/helpers/get-faced-filters"
 import { PRODUCT_LIMIT } from "@/const"
 import { ProductListingSkeleton } from "@/components/organisms/ProductListingSkeleton/ProductListingSkeleton"
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 import { listProducts } from "@/lib/data/products"
 import { getProductPrice } from "@/lib/helpers/get-product-price"
 
@@ -78,7 +78,7 @@ const ProductsListing = ({
 
   const searchParamas = useSearchParams()
 
-  async function handleSetProducts() {
+  const handleSetProducts = useCallback(async () => {
     try {
       setApiProducts(null)
       const { response } = await listProducts({
@@ -100,11 +100,11 @@ const ProductsListing = ({
     } catch (error) {
       setApiProducts(null)
     }
-  }
+  }, [items, locale])
 
   useEffect(() => {
     handleSetProducts()
-  }, [items.length])
+  }, [handleSetProducts])
 
   if (!results?.processingTimeMS) return <ProductListingSkeleton />
 

@@ -47,7 +47,7 @@ export const CartAddressSection = ({
     if (!isAddress) {
       router.replace(pathname + "?step=address")
     }
-  }, [isAddress])
+  }, [isAddress, router, pathname])
 
   const handleEdit = () => {
     router.replace(pathname + "?step=address")

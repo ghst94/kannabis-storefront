@@ -1,7 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 import { Container } from "@medusajs/ui"
 import { mapKeys } from "lodash"
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { Input } from "@/components/atoms"
 import AddressSelect from "@/components/cells/AddressSelect/AddressSelect"
 import CountrySelect from "@/components/cells/CountrySelect/CountrySelect"
@@ -41,10 +41,10 @@ const ShippingAddress = ({
       customer?.addresses.filter(
         (a) => a.country_code && a.country_code === locale
       ),
-    [customer?.addresses]
+    [customer?.addresses, locale]
   )
 
-  const setFormAddress = (
+  const setFormAddress = useCallback((
     address?: HttpTypes.StoreCartAddress,
     email?: string
   ) => {
@@ -67,7 +67,7 @@ const ShippingAddress = ({
         ...prevState,
         email: email,
       }))
-  }
+  }, [locale])
 
   useEffect(() => {
     // Ensure cart is not null and has a shipping_address before setting form data
@@ -78,7 +78,7 @@ const ShippingAddress = ({
     if (cart && !cart.email && customer?.email) {
       setFormAddress(undefined, customer.email)
     }
-  }, [cart]) // Add cart as a dependency
+  }, [cart, customer?.email, setFormAddress])
 
   const handleChange = (
     e: React.ChangeEvent<

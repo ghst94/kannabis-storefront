@@ -11,12 +11,16 @@ const funnelDisplay = Funnel_Display({
   variable: "--font-funnel-sans",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600"],
+  display: "swap",
+  preload: true,
 })
 
 const barlow = Barlow({
   variable: "--font-barlow",
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700", "800"],
+  display: "swap",
+  preload: true,
 })
 
 export const metadata: Metadata = {
