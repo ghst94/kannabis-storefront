@@ -15,8 +15,8 @@ export default async function RewardsPage({
   }
 
   // Mock rewards data - integrate with your actual rewards system
-  const rewardsPoints = customer?.metadata?.rewards_points || 0
-  const lifetimePoints = customer?.metadata?.lifetime_points || 0
+  const rewardsPoints = Number(customer?.metadata?.rewards_points) || 0
+  const lifetimePoints = Number(customer?.metadata?.lifetime_points) || 0
   const rewardsTier = rewardsPoints >= 1000 ? 'Gold' : rewardsPoints >= 500 ? 'Silver' : 'Bronze'
 
   const availableRewards = [

@@ -24,7 +24,7 @@ export default async function DashboardPage({
   const recentOrders = orders?.slice(0, 3) || []
 
   // Mock rewards data - integrate with your actual rewards system
-  const rewardsPoints = customer?.metadata?.rewards_points || 0
+  const rewardsPoints = Number(customer?.metadata?.rewards_points) || 0
   const nextRewardAt = 500
   const rewardsProgress = (rewardsPoints / nextRewardAt) * 100
 
