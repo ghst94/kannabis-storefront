@@ -13,15 +13,6 @@ export default {
         barlow: ["var(--font-barlow)", "sans-serif"],
         funnel: ["var(--font-funnel-sans)", "sans-serif"],
       },
-      colors: {
-        cookies: {
-          yellow: "#FFF205",
-          "light-yellow": "#FFF32A",
-          blue: "#00A0DB",
-          orange: "#F24C24",
-          "access-blue": "#1876c9",
-        },
-      },
       backgroundColor: {
         primary: "rgba(var(--bg-primary))",
         secondary: "rgba(var(--bg-secondary))",
@@ -82,6 +73,13 @@ export default {
         },
       },
       colors: {
+        cookies: {
+          yellow: "#FFF205",
+          "light-yellow": "#FFF32A",
+          blue: "#00A0DB",
+          orange: "#F24C24",
+          "access-blue": "#1876c9",
+        },
         primary: "rgba(var(--content-primary))",
         secondary: "rgba(var(--content-secondary))",
         tertiary: "rgba(var(--content-tertiary))",
