@@ -1,6 +1,6 @@
 import { retrieveCustomer } from "@/lib/data/customer"
 import { retrieveCart } from "@/lib/data/cart"
-import { listCustomerOrders } from "@/lib/data/orders"
+import { listOrders } from "@/lib/data/orders"
 import { redirect } from "next/navigation"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
 import { UserButton } from "@clerk/nextjs"
@@ -17,7 +17,7 @@ export default async function DashboardPage({
     redirect(`/${locale}/user`)
   }
 
-  const orders = await listCustomerOrders(0, 5)
+  const orders = await listOrders(5, 0)
   const activeOrders = orders?.filter(
     (order: any) => order.fulfillment_status !== "fulfilled"
   ) || []
