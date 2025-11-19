@@ -31,8 +31,8 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
       {!image && (
         <>
           <div className="absolute inset-0 bg-white" />
-          {/* Yellow accent bar - Cookies.co style */}
-          <div className="absolute top-0 left-0 right-0 h-2 bg-cookies-yellow" />
+          {/* Emerald accent bar */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-emerald-600" />
         </>
       )}
 
@@ -44,8 +44,8 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
             {heading}
           </h1>
 
-          {/* Subheading - Cookies.co cyan blue */}
-          <p className="font-barlow text-xl lg:text-2xl mb-10 text-cookies-blue font-bold uppercase tracking-wide max-w-[600px]">
+          {/* Subheading */}
+          <p className="font-barlow text-xl lg:text-2xl mb-10 text-emerald-500 font-bold uppercase tracking-wide max-w-[600px]">
             {paragraph}
           </p>
 
@@ -56,7 +56,7 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
                 <Link
                   key={path}
                   href={path}
-                  className="group inline-flex items-center justify-center gap-3 bg-cookies-orange text-cookies-light-yellow hover:bg-black hover:text-cookies-yellow transition-all duration-300 px-10 py-5 font-barlow font-black uppercase tracking-widest text-sm border-2 border-black hover:scale-105"
+                  className="group inline-flex items-center justify-center gap-3 bg-emerald-600 text-white hover:bg-black hover:text-emerald-400 transition-all duration-300 px-10 py-5 font-barlow font-black uppercase tracking-widest text-sm border-2 border-black hover:scale-105"
                   aria-label={label}
                   title={label}
                 >
@@ -73,8 +73,8 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
         </div>
       </div>
 
-      {/* Yellow accent strip at bottom - Cookies.co style */}
-      <div className="absolute bottom-0 left-0 right-0 h-3 bg-cookies-yellow" />
+      {/* Emerald accent strip at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-3 bg-emerald-600" />
     </section>
   )
 }

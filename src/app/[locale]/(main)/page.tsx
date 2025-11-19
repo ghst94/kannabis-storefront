@@ -177,8 +177,8 @@ export default async function Home({
         </div>
       </div>
 
-      {/* Yellow Divider - Cookies.co style */}
-      <div className="w-full h-1 bg-cookies-yellow" />
+      {/* Emerald Divider */}
+      <div className="w-full h-1 bg-emerald-600" />
 
       {/* Shop By Category Section */}
       <div className="w-full bg-white py-16">
@@ -194,8 +194,8 @@ export default async function Home({
         </div>
       </div>
 
-      {/* Yellow Divider - Cookies.co style */}
-      <div className="w-full h-1 bg-cookies-yellow" />
+      {/* Emerald Divider */}
+      <div className="w-full h-1 bg-emerald-600" />
 
       {/* Shop By Strain Type Section */}
       <div className="w-full bg-white py-16">
@@ -211,8 +211,8 @@ export default async function Home({
         </div>
       </div>
 
-      {/* Bottom Yellow Accent - Cookies.co style */}
-      <div className="w-full h-2 bg-cookies-yellow" />
+      {/* Bottom Emerald Accent */}
+      <div className="w-full h-2 bg-emerald-600" />
     </main>
   )
 }

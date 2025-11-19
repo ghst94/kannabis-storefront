@@ -38,12 +38,12 @@ export const ProductCard = ({
         "relative group flex flex-col w-full lg:w-[calc(25%-1rem)] min-w-[250px] overflow-hidden bg-white transition-all duration-300"
       )}
     >
-      {/* Image Container - Cookies.co style */}
+      {/* Image Container */}
       <LocalizedClientLink
         href={`/products/${product.handle}`}
         aria-label={`View ${productName}`}
         title={`View ${productName}`}
-        className="relative w-full aspect-square overflow-hidden bg-white border border-gray-200 group-hover:border-cookies-yellow transition-all duration-300"
+        className="relative w-full aspect-square overflow-hidden bg-white border border-gray-200 group-hover:border-emerald-500 transition-all duration-300"
       >
         <div className="w-full h-full relative">
           {product.thumbnail ? (
@@ -75,14 +75,14 @@ export const ProductCard = ({
           {(thc || cbd) && (
             <div className="absolute bottom-2 right-2 flex gap-1">
               {thc && (
-                <div className="px-2 py-1 bg-cookies-yellow text-black border border-black">
+                <div className="px-2 py-1 bg-emerald-600 text-white border border-black">
                   <span className="text-[10px] font-barlow font-extrabold uppercase">
                     {thc}% THC
                   </span>
                 </div>
               )}
               {cbd && (
-                <div className="px-2 py-1 bg-cookies-blue text-white border border-black">
+                <div className="px-2 py-1 bg-purple-600 text-white border border-black">
                   <span className="text-[10px] font-barlow font-extrabold uppercase">
                     {cbd}% CBD
                   </span>
@@ -100,7 +100,7 @@ export const ProductCard = ({
           aria-label={`Go to ${productName} page`}
           title={`Go to ${productName} page`}
         >
-          <h3 className="font-barlow text-base font-bold text-black uppercase tracking-wide group-hover:text-cookies-blue transition-colors line-clamp-2">
+          <h3 className="font-barlow text-base font-bold text-black uppercase tracking-wide group-hover:text-emerald-600 transition-colors line-clamp-2">
             {product.title}
           </h3>
         </LocalizedClientLink>
@@ -124,7 +124,7 @@ export const ProductCard = ({
               </p>
             )}
           </div>
-          <Button className="bg-cookies-orange hover:bg-cookies-orange/90 text-cookies-light-yellow font-barlow font-black text-xs uppercase tracking-wider px-4 py-2 transition-all hover:scale-105">
+          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white font-barlow font-black text-xs uppercase tracking-wider px-4 py-2 transition-all hover:scale-105">
             ADD
           </Button>
         </div>

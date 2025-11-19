@@ -43,7 +43,7 @@ export function CategoryCard({
   return (
     <LocalizedClientLink
       href={`/categories/${category.handle}`}
-      className="group relative flex flex-col bg-white border border-gray-200 overflow-hidden transition-all duration-300 hover:border-cookies-yellow hover:shadow-xl w-[280px] h-[380px]"
+      className="group relative flex flex-col bg-white border border-gray-200 overflow-hidden transition-all duration-300 hover:border-emerald-500 hover:shadow-xl w-[280px] h-[380px]"
     >
       {/* Image section - Cookies.co style */}
       <div className="relative h-[280px] w-full overflow-hidden bg-white">
@@ -77,7 +77,7 @@ export function CategoryCard({
       {/* Content section - Cookies.co style */}
       <div className="flex-1 flex flex-col justify-center p-5 bg-white border-t border-gray-200">
         {/* Shop Now CTA */}
-        <div className="flex items-center justify-center gap-2 text-black group-hover:text-cookies-blue transition-colors">
+        <div className="flex items-center justify-center gap-2 text-black group-hover:text-emerald-600 transition-colors">
           <span className="font-barlow text-sm font-black uppercase tracking-widest">SHOP NOW</span>
           <svg
             className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300"
