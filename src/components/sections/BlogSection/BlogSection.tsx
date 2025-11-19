@@ -1,50 +1,39 @@
-import { BlogPost } from '@/types/blog';
-import { BlogCard } from '@/components/organisms';
+import { listProducts } from '@/lib/data/products';
+import { ProductCard } from '@/components/organisms';
 
-export const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: "The Ultimate Guide to Cannabis Terpenes",
-    excerpt:
-      "Discover how terpenes influence aroma, flavor, and effects. Learn to identify profiles that match your preferences.",
-    image: '/images/blog/post-1.jpg',
-    category: 'EDUCATION',
-    href: '#',
-  },
-  {
-    id: 2,
-    title: 'Top Strains for Relaxation & Sleep',
-    excerpt:
-      'From classic indicas to CBD-rich hybrids, explore the best strains for unwinding after a long day.',
-    image: '/images/blog/post-2.jpg',
-    category: 'STRAIN GUIDE',
-    href: '#',
-  },
-  {
-    id: 3,
-    title: 'Edibles 101: Dosing & Effects',
-    excerpt:
-      'Master the art of cannabis edibles with our comprehensive guide to proper dosing, timing, and choosing the right products.',
-    image: '/images/blog/post-3.jpg',
-    category: 'GUIDE',
-    href: '#',
-  },
-];
+export async function BlogSection({ locale }: { locale: string }) {
+  // Fetch the newest products based on created_at date
+  const {
+    response: { products },
+  } = await listProducts({
+    countryCode: locale,
+    queryParams: {
+      limit: 3,
+      order: '-created_at', // Newest first
+    },
+    forceCache: false,
+  }).catch((error) => {
+    console.error("Failed to fetch latest products:", error)
+    return { response: { products: [], count: 0 }, nextPage: null }
+  })
 
-export function BlogSection() {
+  if (!products.length) {
+    return null
+  }
+
   return (
-    <section className='bg-tertiary rounded-2xl p-8'>
-      <div className='flex items-center justify-between mb-12'>
-        <h2 className='heading-lg text-tertiary'>
-          CANNABIS KNOWLEDGE HUB
+    <section className='bg-zinc-800 rounded-2xl p-6 lg:p-8'>
+      <div className='flex items-center justify-between mb-8 lg:mb-12'>
+        <h2 className='heading-lg text-white uppercase font-barlow font-black'>
+          THE LATEST DROPS
         </h2>
       </div>
-      <div className='grid grid-cols-1 lg:grid-cols-3'>
-        {blogPosts.map((post, index) => (
-          <BlogCard
-            key={post.id}
-            index={index}
-            post={post}
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6'>
+        {products.map((product) => (
+          <ProductCard
+            key={product.id}
+            product={product}
+            api_product={product}
           />
         ))}
       </div>

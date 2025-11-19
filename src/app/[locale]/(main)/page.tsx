@@ -205,10 +205,10 @@ export default async function Home({
         </div>
       </div>
 
-      {/* Blog Section */}
+      {/* Latest Drops Section */}
       <div className="w-full bg-zinc-900 py-16">
         <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
-          <BlogSection />
+          <BlogSection locale={locale} />
         </div>
       </div>
 
