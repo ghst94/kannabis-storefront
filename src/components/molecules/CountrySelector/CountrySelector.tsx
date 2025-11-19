@@ -16,6 +16,7 @@ import { HttpTypes } from "@medusajs/types"
 import { updateRegionWithValidation } from "@/lib/data/cart"
 import { Label } from "@medusajs/ui"
 import { toast } from "@/lib/helpers/toast"
+import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 type CountryOption = {
   country: string
@@ -82,20 +83,29 @@ const CountrySelect = ({ regions }: CountrySelectProps) => {
 
   return (
     <div className="flex items-center justify-center gap-3">
-      {/* Sign In Button */}
-      <button
-        onClick={() => router.push(`/${countryCode}/user`)}
-        className="flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500 text-black font-barlow font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-lime-400 hover:shadow-lg hover:shadow-lime-500/20 hover:scale-105"
-      >
-        SIGN IN
-      </button>
-      {/* Sign Up Button */}
-      <button
-        onClick={() => router.push(`/${countryCode}/user/register`)}
-        className="flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500 text-black font-barlow font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-lime-400 hover:shadow-lg hover:shadow-lime-500/20 hover:scale-105"
-      >
-        SIGN UP
-      </button>
+      <SignedOut>
+        {/* Sign In Button */}
+        <SignInButton mode="modal">
+          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500 text-black font-barlow font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-lime-400 hover:shadow-lg hover:shadow-lime-500/20 hover:scale-105">
+            SIGN IN
+          </button>
+        </SignInButton>
+        {/* Sign Up Button */}
+        <SignUpButton mode="modal">
+          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500 text-black font-barlow font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-lime-400 hover:shadow-lg hover:shadow-lime-500/20 hover:scale-105">
+            SIGN UP
+          </button>
+        </SignUpButton>
+      </SignedOut>
+      <SignedIn>
+        <UserButton
+          appearance={{
+            elements: {
+              avatarBox: "w-10 h-10"
+            }
+          }}
+        />
+      </SignedIn>
       <div className="hidden">
         <Listbox
           onChange={handleChange}
