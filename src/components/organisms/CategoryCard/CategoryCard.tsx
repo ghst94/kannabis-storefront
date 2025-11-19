@@ -43,10 +43,10 @@ export function CategoryCard({
   return (
     <LocalizedClientLink
       href={`/categories/${category.handle}`}
-      className="group relative flex flex-col bg-zinc-800 border border-zinc-700 overflow-hidden transition-all duration-300 hover:border-lime-500 hover:shadow-xl w-[280px] h-[380px]"
+      className="group relative flex flex-col bg-zinc-800 border border-zinc-700 overflow-hidden transition-all duration-300 hover:border-lime-500 hover:shadow-xl w-[200px] sm:w-[240px] lg:w-[280px] h-[280px] sm:h-[320px] lg:h-[380px]"
     >
       {/* Image section - Dark theme */}
-      <div className="relative h-[280px] w-full overflow-hidden bg-zinc-900">
+      <div className="relative h-[200px] sm:h-[240px] lg:h-[280px] w-full overflow-hidden bg-zinc-900">
         {/* Gradient background */}
         <div
           className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
@@ -58,8 +58,8 @@ export function CategoryCard({
 
         {/* Category name overlay - Dark theme */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center px-4">
-            <h3 className="font-barlow text-4xl font-black text-white uppercase tracking-tight drop-shadow-2xl">
+          <div className="text-center px-2 sm:px-4">
+            <h3 className="font-barlow text-2xl sm:text-3xl lg:text-4xl font-black text-white uppercase tracking-tight drop-shadow-2xl">
               {category.name}
             </h3>
           </div>
@@ -75,10 +75,10 @@ export function CategoryCard({
       </div>
 
       {/* Content section - Dark theme */}
-      <div className="flex-1 flex flex-col justify-center p-5 bg-zinc-800 border-t border-zinc-700">
+      <div className="flex-1 flex flex-col justify-center p-3 sm:p-4 lg:p-5 bg-zinc-800 border-t border-zinc-700">
         {/* Shop Now CTA */}
-        <div className="flex items-center justify-center gap-2 text-white group-hover:text-lime-500 transition-colors">
-          <span className="font-barlow text-sm font-black uppercase tracking-widest">SHOP NOW</span>
+        <div className="flex items-center justify-center gap-1 sm:gap-2 text-white group-hover:text-lime-500 transition-colors">
+          <span className="font-barlow text-xs sm:text-sm font-black uppercase tracking-widest">SHOP NOW</span>
           <svg
             className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300"
             fill="none"

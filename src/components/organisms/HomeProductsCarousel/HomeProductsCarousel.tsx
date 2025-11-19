@@ -19,22 +19,33 @@ export const HomeProductsCarousel = async ({
   } = await listProducts({
     countryCode: locale,
     queryParams: {
-      limit: home ? 4 : undefined,
+      limit: home ? 8 : undefined,
       order: "created_at",
       handle: home
         ? undefined
         : sellerProducts.map((product) => product.handle),
     },
-    forceCache: !home,
+    forceCache: false,
+  }).catch((error) => {
+    console.error("Failed to fetch products:", error)
+    return { response: { products: [], count: 0 }, nextPage: null }
   })
 
-  if (!products.length && !sellerProducts.length) return null
+  const displayProducts = home ? products : (sellerProducts.length ? sellerProducts : products)
+
+  if (!displayProducts.length) {
+    return (
+      <div className="flex justify-center items-center py-12">
+        <p className="text-zinc-400 text-lg">No products available at the moment.</p>
+      </div>
+    )
+  }
 
   return (
     <div className="flex justify-center w-full">
       <Carousel
         align="start"
-        items={(sellerProducts.length ? sellerProducts : products).map(
+        items={displayProducts.map(
           (product) => (
             <ProductCard
               key={product.id}

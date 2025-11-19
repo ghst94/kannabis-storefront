@@ -27,10 +27,19 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
         </div>
       )}
 
-      {/* If no image, use dark background with lime accent */}
+      {/* If no image, use animated gradient background */}
       {!image && (
         <>
-          <div className="absolute inset-0 bg-zinc-900" />
+          {/* Animated gradient background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-zinc-900 via-black to-zinc-800" />
+
+          {/* Animated accent blobs */}
+          <div className="absolute top-0 left-0 w-96 h-96 bg-lime-500/20 rounded-full blur-3xl animate-parallax-slow" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-lime-500/10 rounded-full blur-3xl animate-scale-pulse" />
+
+          {/* Grid pattern overlay */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(132,204,22,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(132,204,22,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+
           {/* Lime green accent bar */}
           <div className="absolute top-0 left-0 right-0 h-2 bg-lime-500" />
         </>

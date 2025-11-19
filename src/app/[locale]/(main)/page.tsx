@@ -162,7 +162,7 @@ export default async function Home({
 
       {/* Hero Section - Full Width */}
       <Hero
-        image="/images/hero/Image.jpg"
+        image=""
         heading="Premium Cannabis, Same-Day Delivery"
         paragraph="Discover top-quality strains, edibles, and accessories"
         buttons={[
