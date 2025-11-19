@@ -38,11 +38,11 @@ export const AlgoliaProductsListing = ({
 
   const filters = `${
     seller_handle
-      ? `NOT seller:null AND seller.handle:${seller_handle} AND NOT seller.store_status:SUSPENDED AND `
+      ? `NOT seller:null AND seller.handle:${seller_handle} AND NOT seller.store_status:SUSPENDED`
       : ""
-  }supported_countries:${locale}${
+  }${
     category_id
-      ? ` AND categories.id:${category_id}${
+      ? `${seller_handle ? " AND " : ""}categories.id:${category_id}${
           collection_id !== undefined
             ? ` AND collections.id:${collection_id}`
             : ""
