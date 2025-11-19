@@ -12,7 +12,6 @@ import { headers } from "next/headers"
 import Script from "next/script"
 import { listRegions } from "@/lib/data/regions"
 import { toHreflang } from "@/lib/helpers/hreflang"
-import { listProducts } from "@/lib/data/products"
 
 export async function generateMetadata({
   params,
@@ -123,15 +122,6 @@ export default async function Home({
     process.env.NEXT_PUBLIC_SITE_NAME ||
     "KANNABIS - Premium Cannabis Marketplace"
 
-  // Fetch products from backend
-  const { response: { products } } = await listProducts({
-    countryCode: locale,
-    queryParams: {
-      limit: 8,
-    },
-    forceCache: true,
-  }).catch(() => ({ response: { products: [], count: 0 }, nextPage: null }))
-
   return (
     <main className="flex flex-col gap-0 row-start-2 items-center text-primary w-full bg-zinc-900">
       <link
@@ -183,7 +173,7 @@ export default async function Home({
       {/* Trending Products Section */}
       <div className="w-full bg-zinc-900 py-16">
         <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
-          <HomeProductSection heading="TRENDING STRAINS" locale={locale} products={products} home />
+          <HomeProductSection heading="TRENDING STRAINS" locale={locale} home />
         </div>
       </div>
 
