@@ -163,10 +163,11 @@ export default async function Home({
       {/* Hero Section - Full Width */}
       <Hero
         image=""
-        heading="Premium Cannabis, Same-Day Delivery"
-        paragraph="Discover top-quality strains, edibles, and accessories"
+        heading="Kannabis Same-Day Delivery"
+        paragraph="Discover top-quality strains, brands and vibes, right at your fingertips."
         buttons={[
-          { label: "Shop now", path: "/categories" },
+          { label: "Sign In", path: "/user" },
+          { label: "Sign Up", path: "/user/register" },
         ]}
       />
 
