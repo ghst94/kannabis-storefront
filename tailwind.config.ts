@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        barlow: ["var(--font-barlow)", "sans-serif"],
+        funnel: ["var(--font-funnel-sans)", "sans-serif"],
+      },
       backgroundColor: {
         primary: "rgba(var(--bg-primary))",
         secondary: "rgba(var(--bg-secondary))",

@@ -5,7 +5,7 @@ import { AnimatedSection } from "@/components/atoms/AnimatedSection/AnimatedSect
 
 export const BannerSection = () => {
   return (
-    <section className="bg-tertiary container text-tertiary">
+    <section className="bg-tertiary text-tertiary rounded-2xl overflow-hidden">
       <AnimatedSection>
       <div className="grid grid-cols-1 lg:grid-cols-2 items-center hover-lift transition-all duration-500">
         <div className="py-6 px-6 flex flex-col h-full justify-between border border-secondary rounded-sm">
@@ -28,16 +28,17 @@ export const BannerSection = () => {
           </LocalizedClientLink>
         </div>
         <div className="relative aspect-[4/3] lg:aspect-auto lg:h-full flex justify-end rounded-sm overflow-hidden">
-          {/* RTFKT-inspired futuristic gradient background */}
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-600 via-fuchsia-500 to-orange-500" />
-          <div className="absolute inset-0 bg-gradient-to-tl from-emerald-500/50 via-transparent to-cyan-500/50" />
+          {/* Clean gradient background - Cookies.co style */}
+          <div className="absolute inset-0 bg-gradient-to-br from-emerald-700 to-emerald-900" />
 
-          {/* Animated overlay for depth */}
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.1),transparent_50%)] animate-pulse" style={{ animationDuration: '4s' }} />
+          {/* Subtle pattern overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 bg-[linear-gradient(45deg,transparent_48%,rgba(255,255,255,0.1)_50%,transparent_52%)] bg-[length:20px_20px]" />
+          </div>
 
-          {/* Cannabis leaf silhouette overlay */}
-          <div className="absolute inset-0 flex items-center justify-center opacity-20">
-            <div className="text-9xl">🌿</div>
+          {/* Optional: Add product image here */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-white/10 text-9xl">🌿</div>
           </div>
         </div>
       </div>

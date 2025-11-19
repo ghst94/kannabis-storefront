@@ -33,7 +33,7 @@ export const blogPosts: BlogPost[] = [
 
 export function BlogSection() {
   return (
-    <section className='bg-tertiary container'>
+    <section className='bg-tertiary rounded-2xl p-8'>
       <div className='flex items-center justify-between mb-12'>
         <h2 className='heading-lg text-tertiary'>
           CANNABIS KNOWLEDGE HUB

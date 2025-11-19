@@ -1,4 +1,5 @@
 import { Footer, Header } from "@/components/organisms"
+import { AgeGate } from "@/components/organisms/AgeGate/AgeGate"
 import { retrieveCustomer } from "@/lib/data/customer"
 import { checkRegion } from "@/lib/helpers/check-region"
 import { Session } from "@talkjs/react"
@@ -24,6 +25,7 @@ export default async function RootLayout({
   if (!APP_ID || !user)
     return (
       <>
+        <AgeGate />
         <Header />
         {children}
         <Footer />
@@ -32,6 +34,7 @@ export default async function RootLayout({
 
   return (
     <>
+      <AgeGate />
       <Session appId={APP_ID} userId={user.id}>
         <Header />
         {children}

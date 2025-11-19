@@ -81,16 +81,16 @@ const CountrySelect = ({ regions }: CountrySelectProps) => {
   }
 
   return (
-    <div className="md:flex gap-2 items-center justify-end relative group">
-      {/* Animated delivery indicator */}
-      <div className="hidden md:flex items-center gap-2 px-3 py-1.5 rounded-full bg-gradient-to-r from-emerald-500/10 to-purple-500/10 border border-emerald-500/20 backdrop-blur-sm transition-all duration-300 group-hover:border-emerald-500/40 group-hover:shadow-lg group-hover:shadow-emerald-500/20">
-        <span className="relative flex h-2 w-2">
+    <div className="flex items-center justify-center">
+      {/* Animated delivery indicator - Better aligned */}
+      <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500/10 to-purple-500/10 border border-emerald-500/30 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:shadow-lg hover:shadow-emerald-500/20 hover:scale-105 cursor-pointer">
+        <span className="relative flex h-2.5 w-2.5">
           <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
         </span>
-        <span className="label-md text-emerald-400 font-semibold">LIVE DELIVERY</span>
+        <span className="text-sm font-bold text-emerald-400 tracking-wider">LIVE DELIVERY</span>
       </div>
-      <div>
+      <div className="hidden">
         <Listbox
           onChange={handleChange}
           defaultValue={

@@ -1,35 +1,16 @@
 import { Carousel } from "@/components/cells"
 import { CategoryCard } from "@/components/organisms"
-
-export const categories: { id: number; name: string; handle: string }[] = [
-  {
-    id: 1,
-    name: "Flower",
-    handle: "flower",
-  },
-  {
-    id: 2,
-    name: "Edibles",
-    handle: "edibles",
-  },
-  {
-    id: 3,
-    name: "Concentrates",
-    handle: "concentrates",
-  },
-  {
-    id: 4,
-    name: "Vapes",
-    handle: "vapes",
-  },
-  {
-    id: 5,
-    name: "Accessories",
-    handle: "accessories",
-  },
-]
+import { listCategories } from "@/lib/data/categories"
 
 export const HomeCategories = async ({ heading }: { heading: string }) => {
+  // Fetch categories from Medusa API
+  const { categories } = await listCategories({
+    query: {
+      limit: 10,
+      fields: "id,name,handle",
+    }
+  })
+
   return (
     <section className="bg-primary py-8 w-full">
       <div className="mb-6">

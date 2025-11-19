@@ -123,7 +123,7 @@ export default async function Home({
     "KANNABIS - Premium Cannabis Marketplace"
 
   return (
-    <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start text-primary">
+    <main className="flex flex-col gap-12 row-start-2 items-center text-primary w-full">
       <link
         rel="preload"
         as="image"
@@ -168,15 +168,21 @@ export default async function Home({
           { label: "Shop now", path: "/categories" },
         ]}
       />
-      <div className="px-4 lg:px-8 w-full">
+      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
         <HomeProductSection heading="TRENDING STRAINS" locale={locale} home />
       </div>
-      <div className="px-4 lg:px-8 w-full">
+      <div className="w-full max-w-[90vw] lg:max-w-screen-xl mx-auto px-6">
         <HomeCategories heading="SHOP BY CATEGORY" />
       </div>
-      <BannerSection />
-      <ShopByStyleSection />
-      <BlogSection />
+      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto">
+        <BannerSection />
+      </div>
+      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
+        <ShopByStyleSection />
+      </div>
+      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
+        <BlogSection />
+      </div>
     </main>
   )
 }

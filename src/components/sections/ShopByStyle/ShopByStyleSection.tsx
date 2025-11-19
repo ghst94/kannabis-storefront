@@ -36,7 +36,7 @@ export const styles: Style[] = [
 
 export function ShopByStyleSection() {
   return (
-    <section className="bg-primary container">
+    <section className="bg-primary">
       <AnimatedSection>
         <h2 className="heading-lg text-primary mb-12">SHOP BY STRAIN</h2>
       </AnimatedSection>
@@ -55,15 +55,16 @@ export function ShopByStyleSection() {
           ))}
         </div>
         <div className="relative hidden lg:block h-[600px] rounded-sm overflow-hidden">
-          {/* RTFKT-inspired holographic gradient */}
-          <div className="absolute inset-0 bg-gradient-to-br from-cyan-500 via-blue-600 to-purple-700" />
-          <div className="absolute inset-0 bg-gradient-to-tr from-pink-500/40 via-transparent to-yellow-500/40" />
+          {/* Clean premium gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-purple-800 via-purple-900 to-black" />
 
-          {/* Grid pattern overlay */}
-          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:50px_50px]" />
+          {/* Subtle grid pattern */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
 
-          {/* Glowing orb effect */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl" />
+          {/* Centered content placeholder */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="text-white/5 text-9xl font-bold">KANNABIS</div>
+          </div>
         </div>
       </div>
       </AnimatedSection>
