@@ -3,7 +3,8 @@ import { listOrders } from "@/lib/data/orders"
 import { redirect } from "next/navigation"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
 import { UserButton } from "@clerk/nextjs"
-import { getMockLoyaltyData, getCurrentTier, getNextTier } from "@/lib/loyalty/mock-data"
+import { getCurrentTier, getNextTier } from "@/lib/loyalty/mock-data"
+import { getFullLoyaltyData } from "@/lib/data/loyalty"
 import TierBadge from "@/components/loyalty/TierBadge"
 import PointsDisplay from "@/components/loyalty/PointsDisplay"
 import ActivityTimeline from "@/components/loyalty/ActivityTimeline"
@@ -26,8 +27,8 @@ export default async function DashboardPage({
   ) || []
   const recentOrders = orders?.slice(0, 3) || []
 
-  // Get enhanced loyalty data
-  const loyaltyData = getMockLoyaltyData(customer)
+  // Get enhanced loyalty data from real API
+  const loyaltyData = await getFullLoyaltyData(customer)
   const currentTier = getCurrentTier(loyaltyData.currentPoints)
   const nextTierInfo = getNextTier(loyaltyData.currentPoints)
 

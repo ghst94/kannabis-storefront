@@ -1,7 +1,8 @@
 import { retrieveCustomer } from "@/lib/data/customer"
 import { redirect } from "next/navigation"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import { getMockLoyaltyData, REWARD_TIERS, AVAILABLE_REWARDS } from "@/lib/loyalty/mock-data"
+import { REWARD_TIERS, AVAILABLE_REWARDS } from "@/lib/loyalty/mock-data"
+import { getFullLoyaltyData } from "@/lib/data/loyalty"
 import TierBadge from "@/components/loyalty/TierBadge"
 import ActivityTimeline from "@/components/loyalty/ActivityTimeline"
 
@@ -17,8 +18,8 @@ export default async function RewardsPage({
     redirect(`/${locale}/user`)
   }
 
-  // Get enhanced loyalty data
-  const loyaltyData = getMockLoyaltyData(customer)
+  // Get enhanced loyalty data from real API
+  const loyaltyData = await getFullLoyaltyData(customer)
 
   return (
     <div className="w-full bg-zinc-900 min-h-screen py-8">
