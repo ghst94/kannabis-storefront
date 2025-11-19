@@ -43,18 +43,27 @@ export function CategoryCard({
   return (
     <LocalizedClientLink
       href={`/categories/${category.handle}`}
-      className="group relative flex flex-col bg-white rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 w-[300px] h-[400px]"
+      className="group relative flex flex-col bg-white border border-gray-200 overflow-hidden transition-all duration-300 hover:border-cookies-yellow hover:shadow-xl w-[280px] h-[380px]"
     >
-      {/* Image section with gradient background */}
-      <div className="relative h-[280px] w-full overflow-hidden">
+      {/* Image section - Cookies.co style */}
+      <div className="relative h-[280px] w-full overflow-hidden bg-white">
         {/* Gradient background */}
         <div
-          className="absolute inset-0 transition-transform duration-500 group-hover:scale-110"
+          className="absolute inset-0 transition-transform duration-700 group-hover:scale-105"
           style={{ background: categoryData.bg }}
         />
 
-        {/* Product image overlay */}
-        <div className="absolute inset-0 bg-black/20 transition-opacity duration-300 group-hover:bg-black/10" />
+        {/* Minimal overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
+
+        {/* Category name overlay - Cookies.co style */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center px-4">
+            <h3 className="font-barlow text-4xl font-black text-white uppercase tracking-tight drop-shadow-2xl">
+              {category.name}
+            </h3>
+          </div>
+        </div>
 
         {/* Optional: Add real product image here when available */}
         {/* <Image
@@ -65,25 +74,19 @@ export function CategoryCard({
         /> */}
       </div>
 
-      {/* Content section */}
-      <div className="flex-1 flex flex-col justify-between p-6 bg-white">
-        <div>
-          <h3 className="font-barlow text-2xl font-bold text-gray-900 uppercase tracking-wide mb-2 group-hover:text-emerald-600 transition-colors">
-            {category.name}
-          </h3>
-          <p className="text-sm text-gray-600">Explore collection</p>
-        </div>
-
-        {/* Arrow indicator */}
-        <div className="flex items-center text-gray-900 group-hover:text-emerald-600 transition-colors">
-          <span className="text-sm font-semibold mr-2">SHOP NOW</span>
+      {/* Content section - Cookies.co style */}
+      <div className="flex-1 flex flex-col justify-center p-5 bg-white border-t border-gray-200">
+        {/* Shop Now CTA */}
+        <div className="flex items-center justify-center gap-2 text-black group-hover:text-cookies-blue transition-colors">
+          <span className="font-barlow text-sm font-black uppercase tracking-widest">SHOP NOW</span>
           <svg
-            className="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+            className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300"
             fill="none"
             stroke="currentColor"
+            strokeWidth={3}
             viewBox="0 0 24 24"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>
         </div>
       </div>

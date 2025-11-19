@@ -123,7 +123,7 @@ export default async function Home({
     "KANNABIS - Premium Cannabis Marketplace"
 
   return (
-    <main className="flex flex-col gap-12 row-start-2 items-center text-primary w-full">
+    <main className="flex flex-col gap-0 row-start-2 items-center text-primary w-full bg-white">
       <link
         rel="preload"
         as="image"
@@ -160,29 +160,59 @@ export default async function Home({
         }}
       />
 
+      {/* Hero Section - Full Width */}
       <Hero
         image="/images/hero/Image.jpg"
         heading="Premium Cannabis, Same-Day Delivery"
-        paragraph="Discover top-quality strains, edibles, and accessories. Your gateway to the finest cannabis products delivered right to your door."
+        paragraph="Discover top-quality strains, edibles, and accessories"
         buttons={[
           { label: "Shop now", path: "/categories" },
         ]}
       />
-      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
-        <HomeProductSection heading="TRENDING STRAINS" locale={locale} home />
+
+      {/* Trending Products Section */}
+      <div className="w-full bg-white py-16">
+        <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
+          <HomeProductSection heading="TRENDING STRAINS" locale={locale} home />
+        </div>
       </div>
-      <div className="w-full max-w-[90vw] lg:max-w-screen-xl mx-auto px-6">
-        <HomeCategories heading="SHOP BY CATEGORY" />
+
+      {/* Yellow Divider - Cookies.co style */}
+      <div className="w-full h-1 bg-cookies-yellow" />
+
+      {/* Shop By Category Section */}
+      <div className="w-full bg-white py-16">
+        <div className="w-full max-w-[90vw] lg:max-w-screen-xl mx-auto px-6">
+          <HomeCategories heading="SHOP BY CATEGORY" />
+        </div>
       </div>
-      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto">
-        <BannerSection />
+
+      {/* Banner Section */}
+      <div className="w-full bg-gray-50 py-16">
+        <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
+          <BannerSection />
+        </div>
       </div>
-      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
-        <ShopByStyleSection />
+
+      {/* Yellow Divider - Cookies.co style */}
+      <div className="w-full h-1 bg-cookies-yellow" />
+
+      {/* Shop By Strain Type Section */}
+      <div className="w-full bg-white py-16">
+        <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
+          <ShopByStyleSection />
+        </div>
       </div>
-      <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
-        <BlogSection />
+
+      {/* Blog Section */}
+      <div className="w-full bg-gray-50 py-16">
+        <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
+          <BlogSection />
+        </div>
       </div>
+
+      {/* Bottom Yellow Accent - Cookies.co style */}
+      <div className="w-full h-2 bg-cookies-yellow" />
     </main>
   )
 }
