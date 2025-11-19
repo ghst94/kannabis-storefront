@@ -25,6 +25,12 @@ import { ReviewsToWrite } from "./Reviews/ReviewsToWrite"
 import { ReviewsWritten } from "./Reviews/ReviewsWritten"
 import { CartEmpty } from "./CartEmpty/CartEmpty"
 import { AgeGate } from "./AgeGate/AgeGate"
+import { AgeVerificationFlow } from "./AgeVerification/AgeVerificationFlow"
+import { MedicalCardVerification } from "./MedicalVerification/MedicalCardVerification"
+import { DeliveryZoneSelector } from "./DeliveryZoneSelector/DeliveryZoneSelector"
+import { PurchaseLimitsDisplay } from "./PurchaseLimitsDisplay/PurchaseLimitsDisplay"
+import { AdvancedProductFilters } from "./AdvancedProductFilters/AdvancedProductFilters"
+import { COADisplay } from "./COADisplay/COADisplay"
 
 export {
   ProductCard,
@@ -54,4 +60,10 @@ export {
   ReviewsWritten,
   CartEmpty,
   AgeGate,
+  AgeVerificationFlow,
+  MedicalCardVerification,
+  DeliveryZoneSelector,
+  PurchaseLimitsDisplay,
+  AdvancedProductFilters,
+  COADisplay,
 }
