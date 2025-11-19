@@ -12,6 +12,7 @@ import { headers } from "next/headers"
 import Script from "next/script"
 import { listRegions } from "@/lib/data/regions"
 import { toHreflang } from "@/lib/helpers/hreflang"
+import { listProducts } from "@/lib/data/products"
 
 export async function generateMetadata({
   params,
@@ -122,8 +123,17 @@ export default async function Home({
     process.env.NEXT_PUBLIC_SITE_NAME ||
     "KANNABIS - Premium Cannabis Marketplace"
 
+  // Fetch products from backend
+  const { response: { products } } = await listProducts({
+    countryCode: locale,
+    queryParams: {
+      limit: 8,
+    },
+    forceCache: true,
+  }).catch(() => ({ response: { products: [], count: 0 }, nextPage: null }))
+
   return (
-    <main className="flex flex-col gap-0 row-start-2 items-center text-primary w-full bg-white">
+    <main className="flex flex-col gap-0 row-start-2 items-center text-primary w-full bg-zinc-900">
       <link
         rel="preload"
         as="image"
@@ -171,48 +181,48 @@ export default async function Home({
       />
 
       {/* Trending Products Section */}
-      <div className="w-full bg-white py-16">
+      <div className="w-full bg-zinc-900 py-16">
         <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
-          <HomeProductSection heading="TRENDING STRAINS" locale={locale} home />
+          <HomeProductSection heading="TRENDING STRAINS" locale={locale} products={products} home />
         </div>
       </div>
 
-      {/* Emerald Divider */}
-      <div className="w-full h-1 bg-emerald-600" />
+      {/* Lime Green Divider */}
+      <div className="w-full h-1 bg-lime-500" />
 
       {/* Shop By Category Section */}
-      <div className="w-full bg-white py-16">
+      <div className="w-full bg-black py-16">
         <div className="w-full max-w-[90vw] lg:max-w-screen-xl mx-auto px-6">
           <HomeCategories heading="SHOP BY CATEGORY" />
         </div>
       </div>
 
       {/* Banner Section */}
-      <div className="w-full bg-gray-50 py-16">
+      <div className="w-full bg-zinc-900 py-16">
         <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
           <BannerSection />
         </div>
       </div>
 
-      {/* Emerald Divider */}
-      <div className="w-full h-1 bg-emerald-600" />
+      {/* Lime Green Divider */}
+      <div className="w-full h-1 bg-lime-500" />
 
       {/* Shop By Strain Type Section */}
-      <div className="w-full bg-white py-16">
+      <div className="w-full bg-black py-16">
         <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
           <ShopByStyleSection />
         </div>
       </div>
 
       {/* Blog Section */}
-      <div className="w-full bg-gray-50 py-16">
+      <div className="w-full bg-zinc-900 py-16">
         <div className="w-full max-w-[85vw] lg:max-w-screen-xl mx-auto px-6">
           <BlogSection />
         </div>
       </div>
 
-      {/* Bottom Emerald Accent */}
-      <div className="w-full h-2 bg-emerald-600" />
+      {/* Bottom Lime Green Accent */}
+      <div className="w-full h-2 bg-lime-500" />
     </main>
   )
 }

@@ -35,7 +35,7 @@ export const ProductCard = ({
   return (
     <div
       className={clsx(
-        "relative group flex flex-col w-full lg:w-[calc(25%-1rem)] min-w-[250px] overflow-hidden bg-white transition-all duration-300"
+        "relative group flex flex-col w-full lg:w-[calc(25%-1rem)] min-w-[250px] overflow-hidden bg-zinc-800 transition-all duration-300"
       )}
     >
       {/* Image Container */}
@@ -43,7 +43,7 @@ export const ProductCard = ({
         href={`/products/${product.handle}`}
         aria-label={`View ${productName}`}
         title={`View ${productName}`}
-        className="relative w-full aspect-square overflow-hidden bg-white border border-gray-200 group-hover:border-emerald-500 transition-all duration-300"
+        className="relative w-full aspect-square overflow-hidden bg-zinc-900 border border-zinc-700 group-hover:border-lime-500 transition-all duration-300"
       >
         <div className="w-full h-full relative">
           {product.thumbnail ? (
@@ -57,8 +57,8 @@ export const ProductCard = ({
               className="object-cover transition-transform duration-700 group-hover:scale-110"
             />
           ) : (
-            <div className="w-full h-full bg-white flex items-center justify-center border border-gray-200">
-              <span className="text-gray-200 text-6xl">🌿</span>
+            <div className="w-full h-full bg-zinc-900 flex items-center justify-center border border-zinc-700">
+              <span className="text-zinc-700 text-6xl">🌿</span>
             </div>
           )}
 
@@ -75,14 +75,14 @@ export const ProductCard = ({
           {(thc || cbd) && (
             <div className="absolute bottom-2 right-2 flex gap-1">
               {thc && (
-                <div className="px-2 py-1 bg-emerald-600 text-white border border-black">
+                <div className="px-2 py-1 bg-lime-500 text-black border border-black">
                   <span className="text-[10px] font-barlow font-extrabold uppercase">
                     {thc}% THC
                   </span>
                 </div>
               )}
               {cbd && (
-                <div className="px-2 py-1 bg-purple-600 text-white border border-black">
+                <div className="px-2 py-1 bg-purple-500 text-white border border-black">
                   <span className="text-[10px] font-barlow font-extrabold uppercase">
                     {cbd}% CBD
                   </span>
@@ -93,38 +93,38 @@ export const ProductCard = ({
         </div>
       </LocalizedClientLink>
 
-      {/* Product Info - Cookies.co style */}
-      <div className="p-4 flex flex-col gap-2 bg-white">
+      {/* Product Info - Dark theme */}
+      <div className="p-4 flex flex-col gap-2 bg-zinc-800">
         <LocalizedClientLink
           href={`/products/${product.handle}`}
           aria-label={`Go to ${productName} page`}
           title={`Go to ${productName} page`}
         >
-          <h3 className="font-barlow text-base font-bold text-black uppercase tracking-wide group-hover:text-emerald-600 transition-colors line-clamp-2">
+          <h3 className="font-barlow text-base font-bold text-white uppercase tracking-wide group-hover:text-lime-500 transition-colors line-clamp-2">
             {product.title}
           </h3>
         </LocalizedClientLink>
 
-        {/* Effects - Cookies.co style */}
+        {/* Effects */}
         {effects && (
-          <p className="text-xs text-gray-600 uppercase tracking-wide font-semibold line-clamp-1">
+          <p className="text-xs text-zinc-400 uppercase tracking-wide font-semibold line-clamp-1">
             {effects}
           </p>
         )}
 
-        {/* Price - Cookies.co style */}
+        {/* Price */}
         <div className="flex items-center justify-between mt-2">
           <div className="flex items-center gap-2">
-            <p className="font-barlow font-black text-2xl text-black">
+            <p className="font-barlow font-black text-2xl text-white">
               {cheapestPrice?.calculated_price}
             </p>
             {cheapestPrice?.calculated_price !== cheapestPrice?.original_price && (
-              <p className="text-sm text-gray-400 line-through font-barlow">
+              <p className="text-sm text-zinc-500 line-through font-barlow">
                 {cheapestPrice?.original_price}
               </p>
             )}
           </div>
-          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white font-barlow font-black text-xs uppercase tracking-wider px-4 py-2 transition-all hover:scale-105">
+          <Button className="bg-lime-500 hover:bg-lime-400 text-black font-barlow font-black text-xs uppercase tracking-wider px-4 py-2 transition-all hover:scale-105">
             ADD
           </Button>
         </div>

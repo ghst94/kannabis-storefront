@@ -11,8 +11,8 @@ type HeroProps = {
 
 export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
   return (
-    <section className="w-full relative min-h-[60vh] lg:min-h-[75vh] flex items-center text-primary overflow-hidden bg-white">
-      {/* Background image - Cookies.co style */}
+    <section className="w-full relative min-h-[60vh] lg:min-h-[75vh] flex items-center text-primary overflow-hidden bg-zinc-900">
+      {/* Background image */}
       {image && (
         <div className="absolute inset-0">
           <Image
@@ -23,16 +23,16 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
             priority
           />
           {/* Dark overlay for text readability */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/60" />
         </div>
       )}
 
-      {/* If no image, use clean white background with accent */}
+      {/* If no image, use dark background with lime accent */}
       {!image && (
         <>
-          <div className="absolute inset-0 bg-white" />
-          {/* Emerald accent bar */}
-          <div className="absolute top-0 left-0 right-0 h-2 bg-emerald-600" />
+          <div className="absolute inset-0 bg-zinc-900" />
+          {/* Lime green accent bar */}
+          <div className="absolute top-0 left-0 right-0 h-2 bg-lime-500" />
         </>
       )}
 
@@ -44,19 +44,19 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
             {heading}
           </h1>
 
-          {/* Subheading */}
-          <p className="font-barlow text-xl lg:text-2xl mb-10 text-emerald-500 font-bold uppercase tracking-wide max-w-[600px]">
+          {/* Subheading - Lime green */}
+          <p className="font-barlow text-xl lg:text-2xl mb-10 text-lime-500 font-bold uppercase tracking-wide max-w-[600px]">
             {paragraph}
           </p>
 
-          {/* CTA Buttons - Cookies.co style */}
+          {/* CTA Buttons - Lime green style */}
           {buttons.length > 0 && (
             <div className="flex gap-4 flex-wrap">
               {buttons.map(({ label, path }) => (
                 <Link
                   key={path}
                   href={path}
-                  className="group inline-flex items-center justify-center gap-3 bg-emerald-600 text-white hover:bg-black hover:text-emerald-400 transition-all duration-300 px-10 py-5 font-barlow font-black uppercase tracking-widest text-sm border-2 border-black hover:scale-105"
+                  className="group inline-flex items-center justify-center gap-3 bg-lime-500 text-black hover:bg-lime-400 hover:text-black transition-all duration-300 px-10 py-5 font-barlow font-black uppercase tracking-widest text-sm border-2 border-lime-500 hover:scale-105"
                   aria-label={label}
                   title={label}
                 >
@@ -73,8 +73,8 @@ export const Hero = ({ image, heading, paragraph, buttons }: HeroProps) => {
         </div>
       </div>
 
-      {/* Emerald accent strip at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-3 bg-emerald-600" />
+      {/* Lime green accent strip at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-3 bg-lime-500" />
     </section>
   )
 }

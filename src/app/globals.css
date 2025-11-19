@@ -59,6 +59,19 @@
   .animate-glow {
     animation: glow 2s ease-in-out infinite;
   }
+
+  /* MetaMask-style animations */
+  .animate-parallax-slow {
+    animation: parallaxSlow 20s ease-in-out infinite;
+  }
+
+  .animate-scale-pulse {
+    animation: scalePulse 3s ease-in-out infinite;
+  }
+
+  .animate-rotate-slow {
+    animation: rotateSlow 30s linear infinite;
+  }
 }
 
 /* Custom keyframe animations */
@@ -106,10 +119,45 @@
 
 @keyframes glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 20px rgba(132, 204, 22, 0.5);
   }
   50% {
-    box-shadow: 0 0 40px rgba(16, 185, 129, 0.8);
+    box-shadow: 0 0 40px rgba(132, 204, 22, 0.8);
+  }
+}
+
+@keyframes parallaxSlow {
+  0%, 100% {
+    transform: translateY(0px) translateX(0px);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
+  }
+  50% {
+    transform: translateY(-15px) translateX(-5px);
+  }
+  75% {
+    transform: translateY(-5px) translateX(5px);
+  }
+}
+
+@keyframes scalePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes rotateSlow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 
