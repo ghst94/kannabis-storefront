@@ -36,19 +36,22 @@ export const AlgoliaProductsListing = ({
   const facetFilters: string = getFacedFilters(searchParamas)
   const query: string = searchParamas.get("query") || ""
 
-  const filters = `${
-    seller_handle
-      ? `NOT seller:null AND seller.handle:${seller_handle} AND NOT seller.store_status:SUSPENDED`
-      : ""
-  }${
-    category_id
-      ? `${seller_handle ? " AND " : ""}categories.id:${category_id}${
-          collection_id !== undefined
-            ? ` AND collections.id:${collection_id}`
-            : ""
-        } ${facetFilters}`
-      : ` ${facetFilters}`
-  }`
+  // Build filters array and join with AND
+  const filterParts: string[] = []
+
+  if (category_id) {
+    filterParts.push(`categories.id:${category_id}`)
+  }
+
+  if (collection_id) {
+    filterParts.push(`collections.id:${collection_id}`)
+  }
+
+  if (facetFilters) {
+    filterParts.push(facetFilters)
+  }
+
+  const filters = filterParts.join(" AND ")
 
   return (
     <InstantSearchNext searchClient={client} indexName="products">
