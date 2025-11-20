@@ -16,7 +16,6 @@ import { HttpTypes } from "@medusajs/types"
 import { updateRegionWithValidation } from "@/lib/data/cart"
 import { Label } from "@medusajs/ui"
 import { toast } from "@/lib/helpers/toast"
-import { SignInButton, SignUpButton, SignedIn, SignedOut, UserButton } from '@clerk/nextjs'
 
 type CountryOption = {
   country: string
@@ -83,103 +82,6 @@ const CountrySelect = ({ regions }: CountrySelectProps) => {
 
   return (
     <div className="flex items-center justify-center gap-3">
-      <SignedOut>
-        {/* Sign In Button */}
-        <SignInButton
-          mode="modal"
-          appearance={{
-            baseTheme: undefined,
-            variables: {
-              colorPrimary: '#84cc16',
-              colorBackground: '#18181b',
-              colorInputBackground: '#27272a',
-              colorInputText: '#ffffff',
-              colorText: '#ffffff',
-              colorTextSecondary: '#a1a1aa',
-              colorDanger: '#ef4444',
-              borderRadius: '0.5rem',
-            },
-            elements: {
-              formButtonPrimary:
-                'bg-lime-500 hover:bg-lime-400 text-black font-barlow font-bold uppercase tracking-wider',
-              card: 'bg-zinc-900 border border-zinc-800',
-              headerTitle: 'text-white font-barlow font-bold',
-              headerSubtitle: 'text-zinc-400',
-              socialButtonsBlockButton:
-                'bg-zinc-800 border-zinc-700 hover:bg-zinc-700 text-white',
-              formFieldLabel: 'text-zinc-300',
-              formFieldInput:
-                'bg-zinc-800 border-zinc-700 text-white focus:border-lime-500',
-              footerActionLink: 'text-lime-500 hover:text-lime-400',
-              identityPreviewText: 'text-white',
-              identityPreviewEditButton: 'text-lime-500',
-              formHeaderTitle: 'text-white',
-              formHeaderSubtitle: 'text-zinc-400',
-              otpCodeFieldInput: 'bg-zinc-800 border-zinc-700 text-white',
-              formResendCodeLink: 'text-lime-500',
-              footer: 'hidden', // Hide "Secured by Clerk"
-            },
-          }}
-        >
-          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500 text-black font-barlow font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-lime-400 hover:shadow-lg hover:shadow-lime-500/20 hover:scale-105">
-            SIGN IN
-          </button>
-        </SignInButton>
-        {/* Sign Up Button */}
-        <SignUpButton
-          mode="modal"
-          appearance={{
-            baseTheme: undefined,
-            variables: {
-              colorPrimary: '#84cc16',
-              colorBackground: '#18181b',
-              colorInputBackground: '#27272a',
-              colorInputText: '#ffffff',
-              colorText: '#ffffff',
-              colorTextSecondary: '#a1a1aa',
-              colorDanger: '#ef4444',
-              borderRadius: '0.5rem',
-            },
-            elements: {
-              formButtonPrimary:
-                'bg-lime-500 hover:bg-lime-400 text-black font-barlow font-bold uppercase tracking-wider',
-              card: 'bg-zinc-900 border border-zinc-800',
-              headerTitle: 'text-white font-barlow font-bold',
-              headerSubtitle: 'text-zinc-400',
-              socialButtonsBlockButton:
-                'bg-zinc-800 border-zinc-700 hover:bg-zinc-700 text-white',
-              formFieldLabel: 'text-zinc-300',
-              formFieldInput:
-                'bg-zinc-800 border-zinc-700 text-white focus:border-lime-500',
-              footerActionLink: 'text-lime-500 hover:text-lime-400',
-              identityPreviewText: 'text-white',
-              identityPreviewEditButton: 'text-lime-500',
-              formHeaderTitle: 'text-white',
-              formHeaderSubtitle: 'text-zinc-400',
-              otpCodeFieldInput: 'bg-zinc-800 border-zinc-700 text-white',
-              formResendCodeLink: 'text-lime-500',
-              footer: 'hidden', // Hide "Secured by Clerk"
-            },
-          }}
-        >
-          <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-lime-500 text-black font-barlow font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 hover:bg-lime-400 hover:shadow-lg hover:shadow-lime-500/20 hover:scale-105">
-            SIGN UP
-          </button>
-        </SignUpButton>
-      </SignedOut>
-      <SignedIn>
-        <UserButton
-          appearance={{
-            elements: {
-              avatarBox: "w-10 h-10",
-              userButtonPopoverCard: "bg-zinc-900 border border-zinc-800",
-              userButtonPopoverActionButton: "text-white hover:bg-zinc-800",
-              userButtonPopoverActionButtonText: "text-white",
-              userButtonPopoverFooter: "hidden",
-            }
-          }}
-        />
-      </SignedIn>
       <div className="hidden">
         <Listbox
           onChange={handleChange}
