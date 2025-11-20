@@ -51,15 +51,15 @@ export const AlgoliaProductsListing = ({
     filterParts.push(facetFilters)
   }
 
-  const filters = filterParts.join(" AND ")
+  const filters = filterParts.length > 0 ? filterParts.join(" AND ") : undefined
 
   return (
     <InstantSearchNext searchClient={client} indexName="products">
-      <Configure query={query} filters={filters} />
+      <Configure query={query} {...(filters && { filters })} />
       <ProductsListing
         locale={locale}
         currency_code={currency_code}
-        filters={filters}
+        filters={filters || ""}
       />
     </InstantSearchNext>
   )
