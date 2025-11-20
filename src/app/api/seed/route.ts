@@ -93,30 +93,35 @@ export async function POST(request: NextRequest) {
 
     // Initialize Algolia
     const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY)
-    const index = client.initIndex('products')
 
     // Transform and index products
     const algoliaObjects = products.map(transformProductForAlgolia)
 
     // Configure index settings
-    await index.setSettings({
-      searchableAttributes: [
-        'title',
-        'description',
-        'categories.name',
-        'tags',
-      ],
-      attributesForFaceting: [
-        'filterOnly(categories.id)',
-        'filterOnly(categories.handle)',
-        'tags',
-        'inStock',
-      ],
-      customRanking: ['desc(createdAt)'],
+    await client.setSettings({
+      indexName: 'products',
+      indexSettings: {
+        searchableAttributes: [
+          'title',
+          'description',
+          'categories.name',
+          'tags',
+        ],
+        attributesForFaceting: [
+          'filterOnly(categories.id)',
+          'filterOnly(categories.handle)',
+          'tags',
+          'inStock',
+        ],
+        customRanking: ['desc(createdAt)'],
+      }
     })
 
     // Save to Algolia
-    await index.saveObjects(algoliaObjects)
+    await client.saveObjects({
+      indexName: 'products',
+      objects: algoliaObjects
+    })
 
     console.log('✅ Seed complete!')
 

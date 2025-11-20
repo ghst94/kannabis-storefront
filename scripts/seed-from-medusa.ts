@@ -91,37 +91,41 @@ async function seedAlgolia(products: MedusaProduct[]) {
   console.log('\n🔍 Seeding Algolia...')
 
   const client = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY)
-  const index = client.initIndex('products')
 
   // Transform products for Algolia
   const algoliaObjects = products.map(transformProductForAlgolia)
 
   // Configure index settings
-  await index.setSettings({
-    searchableAttributes: [
-      'title',
-      'description',
-      'categories.name',
-      'tags',
-    ],
-    attributesForFaceting: [
-      'filterOnly(categories.id)',
-      'filterOnly(categories.handle)',
-      'tags',
-      'inStock',
-    ],
-    customRanking: ['desc(createdAt)'],
-    ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
+  await client.setSettings({
+    indexName: 'products',
+    indexSettings: {
+      searchableAttributes: [
+        'title',
+        'description',
+        'categories.name',
+        'tags',
+      ],
+      attributesForFaceting: [
+        'filterOnly(categories.id)',
+        'filterOnly(categories.handle)',
+        'tags',
+        'inStock',
+      ],
+      customRanking: ['desc(createdAt)'],
+      ranking: ['typo', 'geo', 'words', 'filters', 'proximity', 'attribute', 'exact', 'custom'],
+    }
   })
 
   console.log(`📤 Uploading ${algoliaObjects.length} products to Algolia...`)
 
   // Save objects to Algolia
-  const result = await index.saveObjects(algoliaObjects)
+  const result = await client.saveObjects({
+    indexName: 'products',
+    objects: algoliaObjects
+  })
 
   console.log('✅ Algolia seeding complete!')
   console.log(`   - Objects indexed: ${algoliaObjects.length}`)
-  console.log(`   - Task ID: ${result.taskIDs[0]}`)
 
   return result
 }
