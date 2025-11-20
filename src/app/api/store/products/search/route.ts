@@ -17,14 +17,14 @@ export async function POST(req: NextRequest) {
     // Search in Algolia
     const indexName = process.env.NEXT_PUBLIC_ALGOLIA_PRODUCT_INDEX_NAME || 'products'
 
-    const result = await client.searchSingleIndex({
-      indexName,
-      searchParams: {
+    const result = await client.search({
+      requests: [{
+        indexName,
         query,
         filters: filters || '',
         hitsPerPage: hitsPerPage || 20,
         page: page || 0,
-      },
+      }],
     })
 
     return NextResponse.json(result)
