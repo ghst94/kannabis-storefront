@@ -14,6 +14,7 @@ import CountrySelector from "@/components/molecules/CountrySelector/CountrySelec
 import { listRegions } from "@/lib/data/regions"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
 import { MessageButton } from "@/components/molecules/MessageButton/MessageButton"
+import { SearchButton } from "@/components/molecules/SearchButton/SearchButton"
 
 export const Header = async () => {
   const user = await retrieveCustomer()
@@ -64,6 +65,7 @@ export const Header = async () => {
 
         {/* Right Section */}
         <div className="flex items-center justify-end gap-3 lg:gap-6 w-full lg:w-1/3">
+          <SearchButton />
           <CountrySelector regions={regions} />
           {user && <MessageButton />}
           <UserDropdown user={user} />
