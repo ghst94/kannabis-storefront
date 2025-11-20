@@ -1,6 +1,5 @@
 import { HttpTypes } from "@medusajs/types"
 import { NextRequest, NextResponse } from "next/server"
-import { clerkMiddleware } from '@clerk/nextjs/server'
 
 const BACKEND_URL = process.env.MEDUSA_BACKEND_URL
 const PUBLISHABLE_API_KEY = process.env.NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY
@@ -97,12 +96,7 @@ async function getCountryCode(
 }
 
 export async function middleware(request: NextRequest) {
-  // Allow Clerk API routes (they include .js files that need to be served)
-  if (request.nextUrl.pathname.startsWith('/api/__clerk')) {
-    return clerkMiddleware()(request)
-  }
-
-  // Short-circuit other static assets (but not Clerk routes)
+  // Short-circuit static assets
   if (request.nextUrl.pathname.includes(".")) {
     return NextResponse.next()
   }
@@ -146,9 +140,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
-    // Include Clerk API routes
-    '/api/__clerk/(.*)',
-    // Include all other routes except static files and Next.js internals
+    // Include all routes except static files and Next.js internals
     "/((?!_next/static|_next/image|favicon.ico|images|assets|png|svg|jpg|jpeg|gif|webp).*)",
   ],
 }

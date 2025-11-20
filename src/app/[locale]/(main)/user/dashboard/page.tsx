@@ -2,7 +2,6 @@ import { retrieveCustomer } from "@/lib/data/customer"
 import { listOrders } from "@/lib/data/orders"
 import { redirect } from "next/navigation"
 import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedLink"
-import { UserButton } from "@clerk/nextjs"
 import { getCurrentTier, getNextTier } from "@/lib/loyalty/mock-data"
 import { getFullLoyaltyData } from "@/lib/data/loyalty"
 import TierBadge from "@/components/loyalty/TierBadge"
@@ -43,14 +42,6 @@ export default async function DashboardPage({
             </h1>
             <p className="text-zinc-400 mt-1">Your cannabis shopping dashboard</p>
           </div>
-          <UserButton
-            appearance={{
-              elements: {
-                avatarBox: "w-12 h-12",
-                userButtonPopoverCard: "bg-zinc-900 border border-zinc-800",
-              }
-            }}
-          />
         </div>
 
         {/* Loyalty Status Banner */}
