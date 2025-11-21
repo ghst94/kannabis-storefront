@@ -5,7 +5,7 @@ import LocalizedClientLink from "@/components/molecules/LocalizedLink/LocalizedL
 import { ArrowLeftIcon } from "@/icons"
 import { redirect } from "next/navigation"
 import { format } from "date-fns"
-import { retrieveOrderSet } from "@/lib/data/orders"
+import { retrieveOrder } from "@/lib/data/orders"
 import { OrderDetailsSection } from "@/components/sections/OrderDetailsSection/OrderDetailsSection"
 
 export default async function UserPage({
@@ -16,7 +16,7 @@ export default async function UserPage({
   const { id } = await params
 
   const user = await retrieveCustomer()
-  const orderSet = await retrieveOrderSet(id)
+  const orderSet = await retrieveOrder(id)
 
   if (!user) return redirect("/user")
 
