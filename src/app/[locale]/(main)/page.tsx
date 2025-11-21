@@ -178,7 +178,7 @@ export default async function Home({
       </div>
 
       {/* Lime Green Divider */}
-      <div className="w-full h-1 bg-lime-500" />
+      <div className="w-full h-1 bg-cookies-yellow" />
 
       {/* Shop By Category Section */}
       <div className="w-full bg-black py-16">
@@ -195,7 +195,7 @@ export default async function Home({
       </div>
 
       {/* Lime Green Divider */}
-      <div className="w-full h-1 bg-lime-500" />
+      <div className="w-full h-1 bg-cookies-yellow" />
 
       {/* Shop By Strain Type Section */}
       <div className="w-full bg-black py-16">
@@ -212,7 +212,7 @@ export default async function Home({
       </div>
 
       {/* Bottom Lime Green Accent */}
-      <div className="w-full h-2 bg-lime-500" />
+      <div className="w-full h-2 bg-cookies-yellow" />
     </main>
   )
 }

@@ -72,14 +72,14 @@ export const CustomCarousel = ({
           <div className="flex gap-3">
             <button
               onClick={() => changeSlideHandler(selectedIndex - 1)}
-              className="p-3 bg-zinc-800 border border-zinc-700 hover:border-lime-500 rounded-sm transition-all active:scale-95"
+              className="p-3 bg-zinc-800 border border-zinc-700 hover:border-cookies-yellow rounded-sm transition-all active:scale-95"
               aria-label="Previous slide"
             >
               <ArrowLeftIcon color="#84cc16" />
             </button>
             <button
               onClick={() => changeSlideHandler(selectedIndex + 1)}
-              className="p-3 bg-zinc-800 border border-zinc-700 hover:border-lime-500 rounded-sm transition-all active:scale-95"
+              className="p-3 bg-zinc-800 border border-zinc-700 hover:border-cookies-yellow rounded-sm transition-all active:scale-95"
               aria-label="Next slide"
             >
               <ArrowRightIcon color="#84cc16" />
@@ -91,7 +91,7 @@ export const CustomCarousel = ({
         <div className="hidden sm:flex justify-center items-center gap-4 mt-6">
           <button
             onClick={() => changeSlideHandler(selectedIndex - 1)}
-            className="p-3 bg-zinc-800 border border-zinc-700 hover:border-lime-500 rounded-sm transition-all hover:scale-105"
+            className="p-3 bg-zinc-800 border border-zinc-700 hover:border-cookies-yellow rounded-sm transition-all hover:scale-105"
             aria-label="Previous slide"
           >
             <ArrowLeftIcon color="#84cc16" />
@@ -105,7 +105,7 @@ export const CustomCarousel = ({
           </div>
           <button
             onClick={() => changeSlideHandler(selectedIndex + 1)}
-            className="p-3 bg-zinc-800 border border-zinc-700 hover:border-lime-500 rounded-sm transition-all hover:scale-105"
+            className="p-3 bg-zinc-800 border border-zinc-700 hover:border-cookies-yellow rounded-sm transition-all hover:scale-105"
             aria-label="Next slide"
           >
             <ArrowRightIcon color="#84cc16" />

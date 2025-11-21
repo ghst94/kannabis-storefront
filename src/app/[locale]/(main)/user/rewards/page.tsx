@@ -26,7 +26,7 @@ export default async function RewardsPage({
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="mb-8">
-          <LocalizedClientLink href="/user/dashboard" className="text-lime-500 hover:text-lime-400 text-sm font-bold mb-2 inline-block">
+          <LocalizedClientLink href="/user/dashboard" className="text-cookies-yellow hover:text-cookies-light-yellow text-sm font-bold mb-2 inline-block">
             ← Back to Dashboard
           </LocalizedClientLink>
           <h1 className="text-3xl font-barlow font-black text-white uppercase tracking-tight">
@@ -38,7 +38,7 @@ export default async function RewardsPage({
         {/* Points Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           {/* Current Points */}
-          <div className="bg-gradient-to-br from-lime-500 to-lime-600 rounded-lg p-6 text-black">
+          <div className="bg-gradient-to-br from-cookies-yellow to-cookies-yellow rounded-lg p-6 text-black">
             <div className="flex items-center justify-between mb-4">
               <h3 className="font-barlow font-bold text-lg">Current Points</h3>
               <div className="text-4xl">🌟</div>
@@ -63,7 +63,7 @@ export default async function RewardsPage({
               <h3 className="font-barlow font-bold text-lg text-white">Member Tier</h3>
               <div className="text-4xl">{loyaltyData.currentTier.icon}</div>
             </div>
-            <p className="text-5xl font-barlow font-black text-lime-500 mb-2">{loyaltyData.currentTier.name}</p>
+            <p className="text-5xl font-barlow font-black text-cookies-yellow mb-2">{loyaltyData.currentTier.name}</p>
             <p className="text-zinc-400 text-sm">
               {loyaltyData.nextTier
                 ? `${loyaltyData.pointsToNextTier} pts to ${loyaltyData.nextTier.name}`
@@ -117,14 +117,14 @@ export default async function RewardsPage({
                   key={tier.name}
                   className={`relative rounded-lg p-6 transition-all duration-300 ${
                     isCurrentTier
-                      ? 'ring-2 ring-lime-500 scale-105'
+                      ? 'ring-2 ring-cookies-yellow scale-105'
                       : isLocked
                       ? 'opacity-60'
                       : ''
                   }`}
                 >
                   {isCurrentTier && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-lime-500 text-black text-xs font-bold rounded-full">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-cookies-yellow text-black text-xs font-bold rounded-full">
                       CURRENT TIER
                     </div>
                   )}
@@ -150,7 +150,7 @@ export default async function RewardsPage({
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-barlow font-black text-white uppercase">Available Rewards</h2>
             <div className="flex items-center gap-2 text-zinc-400 text-sm">
-              <span className="text-lime-500 font-bold">{loyaltyData.availableRewards.length}</span>
+              <span className="text-cookies-yellow font-bold">{loyaltyData.availableRewards.length}</span>
               <span>rewards unlocked</span>
             </div>
           </div>
@@ -160,14 +160,14 @@ export default async function RewardsPage({
               {loyaltyData.availableRewards.map((reward) => (
                 <div
                   key={reward.id}
-                  className="bg-zinc-800 border-2 border-lime-500 rounded-lg p-6 transition-all duration-300 hover:shadow-lg hover:shadow-lime-500/20"
+                  className="bg-zinc-800 border-2 border-cookies-yellow rounded-lg p-6 transition-all duration-300 hover:shadow-lg hover:shadow-cookies-yellow/20"
                 >
                   <div className="text-5xl mb-4">{reward.icon}</div>
                   <h3 className="text-white font-barlow font-bold text-lg mb-2">{reward.name}</h3>
                   <p className="text-zinc-400 text-sm mb-4">{reward.description}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-lime-500 font-bold text-lg">{reward.points} pts</span>
-                    <button className="px-4 py-2 bg-lime-500 text-black font-bold rounded-full hover:bg-lime-400 transition-colors text-sm">
+                    <span className="text-cookies-yellow font-bold text-lg">{reward.points} pts</span>
+                    <button className="px-4 py-2 bg-cookies-yellow text-black font-bold rounded-full hover:bg-cookies-light-yellow transition-colors text-sm">
                       Redeem
                     </button>
                   </div>
@@ -216,7 +216,7 @@ export default async function RewardsPage({
         </div>
 
         {/* Info Banner */}
-        <div className="mt-8 bg-gradient-to-r from-lime-500/10 to-lime-500/5 border border-lime-500/30 rounded-lg p-6">
+        <div className="mt-8 bg-gradient-to-r from-cookies-yellow/10 to-cookies-yellow/5 border border-cookies-yellow/30 rounded-lg p-6">
           <div className="flex items-start gap-4">
             <div className="text-4xl">💡</div>
             <div className="flex-1">

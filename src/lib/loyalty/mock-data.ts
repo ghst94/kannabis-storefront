@@ -52,7 +52,7 @@ export const REWARD_TIERS: RewardTier[] = [
     minPoints: 1500,
     benefits: ['1.5 points per $1 spent', 'Exclusive products', 'VIP events'],
     icon: '⭐',
-    color: 'from-lime-500 to-lime-600',
+    color: 'from-cookies-yellow to-cookies-yellow',
   },
   {
     name: 'Master',

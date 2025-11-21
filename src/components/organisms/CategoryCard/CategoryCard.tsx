@@ -43,7 +43,7 @@ export function CategoryCard({
   return (
     <LocalizedClientLink
       href={`/categories/${category.handle}`}
-      className="group relative flex flex-col bg-zinc-800 border border-zinc-700 overflow-hidden transition-all duration-300 hover:border-lime-500 hover:shadow-xl w-[200px] sm:w-[240px] lg:w-[280px] h-[280px] sm:h-[320px] lg:h-[380px]"
+      className="group relative flex flex-col bg-zinc-800 border border-zinc-700 overflow-hidden transition-all duration-300 hover:border-cookies-yellow hover:shadow-xl w-[200px] sm:w-[240px] lg:w-[280px] h-[280px] sm:h-[320px] lg:h-[380px]"
     >
       {/* Image section - Dark theme */}
       <div className="relative h-[200px] sm:h-[240px] lg:h-[280px] w-full overflow-hidden bg-zinc-900">
@@ -77,7 +77,7 @@ export function CategoryCard({
       {/* Content section - Dark theme */}
       <div className="flex-1 flex flex-col justify-center p-3 sm:p-4 lg:p-5 bg-zinc-800 border-t border-zinc-700">
         {/* Shop Now CTA */}
-        <div className="flex items-center justify-center gap-1 sm:gap-2 text-white group-hover:text-lime-500 transition-colors">
+        <div className="flex items-center justify-center gap-1 sm:gap-2 text-white group-hover:text-cookies-yellow transition-colors">
           <span className="font-barlow text-xs sm:text-sm font-black uppercase tracking-widest">SHOP NOW</span>
           <svg
             className="w-4 h-4 transform group-hover:translate-x-2 transition-transform duration-300"

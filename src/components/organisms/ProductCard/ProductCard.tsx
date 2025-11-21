@@ -43,7 +43,7 @@ export const ProductCard = ({
         href={`/products/${product.handle}`}
         aria-label={`View ${productName}`}
         title={`View ${productName}`}
-        className="relative w-full aspect-square overflow-hidden bg-zinc-900 border border-zinc-700 group-hover:border-lime-500 transition-all duration-300"
+        className="relative w-full aspect-square overflow-hidden bg-zinc-900 border border-zinc-700 group-hover:border-cookies-yellow transition-all duration-300"
       >
         <div className="w-full h-full relative">
           {product.thumbnail ? (
@@ -75,7 +75,7 @@ export const ProductCard = ({
           {(thc || cbd) && (
             <div className="absolute bottom-2 right-2 flex gap-1">
               {thc && (
-                <div className="px-2 py-1 bg-lime-500 text-black border border-black">
+                <div className="px-2 py-1 bg-cookies-yellow text-black border border-black">
                   <span className="text-[10px] font-barlow font-extrabold uppercase">
                     {thc}% THC
                   </span>
@@ -100,7 +100,7 @@ export const ProductCard = ({
           aria-label={`Go to ${productName} page`}
           title={`Go to ${productName} page`}
         >
-          <h3 className="font-barlow text-base font-bold text-white uppercase tracking-wide group-hover:text-lime-500 transition-colors line-clamp-2">
+          <h3 className="font-barlow text-base font-bold text-white uppercase tracking-wide group-hover:text-cookies-yellow transition-colors line-clamp-2">
             {product.title}
           </h3>
         </LocalizedClientLink>
@@ -124,7 +124,7 @@ export const ProductCard = ({
               </p>
             )}
           </div>
-          <Button className="bg-lime-500 hover:bg-lime-400 text-black font-barlow font-black text-xs uppercase tracking-wider px-4 py-2 transition-all hover:scale-105">
+          <Button className="bg-cookies-yellow hover:bg-cookies-light-yellow text-black font-barlow font-black text-xs uppercase tracking-wider px-4 py-2 transition-all hover:scale-105">
             ADD
           </Button>
         </div>

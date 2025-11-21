@@ -14,19 +14,20 @@
     --neutral-900: 22, 22, 22;
     --neutral-1000: 9, 9, 9;
 
-    /* Brand colors are used across all interactive elements such as buttons, links, inputs, etc. This color can define the overall feel and can elicit emotion. */
-    --brand-25: 247, 247, 247;
-    --brand-50: 238, 238, 238;
-    --brand-100: 226, 226, 226;
-    --brand-200: 198, 198, 198;
-    --brand-300: 163, 163, 163;
-    --brand-400: 115, 115, 115;
-    --brand-500: 82, 82, 82;
-    --brand-600: 64, 64, 64;
-    --brand-700: 27, 27, 27;
-    --brand-800: 22, 22, 22;
-    --brand-900: 9, 9, 9;
-    
+    /* Brand colors - Cookies Yellow */
+    --brand-25: 255, 253, 237;
+    --brand-50: 255, 252, 220;
+    --brand-100: 255, 249, 186;
+    --brand-200: 255, 246, 154;
+    --brand-300: 255, 243, 122;
+    --brand-400: 255, 244, 42;
+    --brand-500: 255, 242, 5;
+    /* Cookies Yellow #FFF205 */
+    --brand-600: 230, 218, 5;
+    --brand-700: 204, 194, 4;
+    --brand-800: 153, 145, 3;
+    --brand-900: 102, 97, 2;
+
     /* Red colors are used across error states and in "destructive" actions. */
     --red-25: 254, 243, 242;
     --red-50: 254, 228, 226;
