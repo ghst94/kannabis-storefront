@@ -8,6 +8,7 @@ export const getFullLoyaltyData = async (customer: HttpTypes.StoreCustomer | nul
       currentPoints: 0,
       tier: "bronze",
       pointsToNextTier: 100,
+      lifetimePoints: 0,
       activities: [],
     }
   }
@@ -17,6 +18,7 @@ export const getFullLoyaltyData = async (customer: HttpTypes.StoreCustomer | nul
     currentPoints: 0,
     tier: "bronze",
     pointsToNextTier: 100,
+    lifetimePoints: 0,
     activities: [],
   }
 }
