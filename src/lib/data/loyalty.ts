@@ -5,7 +5,7 @@ import { HttpTypes } from "@medusajs/types"
 export const getFullLoyaltyData = async (customer: HttpTypes.StoreCustomer | null) => {
   if (!customer) {
     return {
-      points: 0,
+      currentPoints: 0,
       tier: "bronze",
       activities: [],
     }
@@ -13,7 +13,7 @@ export const getFullLoyaltyData = async (customer: HttpTypes.StoreCustomer | nul
 
   // Stub implementation - replace with actual loyalty API calls
   return {
-    points: 0,
+    currentPoints: 0,
     tier: "bronze",
     activities: [],
   }
