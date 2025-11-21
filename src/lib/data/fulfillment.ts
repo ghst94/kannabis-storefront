@@ -1,14 +1,10 @@
 "use server"
 
-import { sdk } from "@/lib/config"
+import { sdk } from "@lib/config"
 import { HttpTypes } from "@medusajs/types"
 import { getAuthHeaders, getCacheOptions } from "./cookies"
-import { StoreCardShippingMethod } from "@/components/sections/CartShippingMethodsSection/CartShippingMethodsSection"
 
-export const listCartShippingMethods = async (
-  cartId: string,
-  is_return: boolean = false
-) => {
+export const listCartShippingMethods = async (cartId: string) => {
   const headers = {
     ...(await getAuthHeaders()),
   }
@@ -18,18 +14,16 @@ export const listCartShippingMethods = async (
   }
 
   return sdk.client
-    .fetch<{ shipping_options: StoreCardShippingMethod[] | null }>(
+    .fetch<HttpTypes.StoreShippingOptionListResponse>(
       `/store/shipping-options`,
       {
         method: "GET",
         query: {
           cart_id: cartId,
-          fields:
-            "+service_zone.fulfllment_set.type,*service_zone.fulfillment_set.location.address",
         },
         headers,
         next,
-        cache: "no-cache",
+        cache: "force-cache",
       }
     )
     .then(({ shipping_options }) => shipping_options)

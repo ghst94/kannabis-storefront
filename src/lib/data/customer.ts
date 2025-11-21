@@ -1,6 +1,7 @@
 "use server"
 
-import { sdk } from "../config"
+import { sdk } from "@lib/config"
+import medusaError from "@lib/util/medusa-error"
 import { HttpTypes } from "@medusajs/types"
 import { revalidateTag } from "next/cache"
 import { redirect } from "next/navigation"
@@ -50,9 +51,7 @@ export const updateCustomer = async (body: HttpTypes.StoreUpdateCustomer) => {
   const updateRes = await sdk.store.customer
     .update(body, {}, headers)
     .then(({ customer }) => customer)
-    .catch((err) => {
-      throw new Error(err.message)
-    })
+    .catch(medusaError)
 
   const cacheTag = await getCacheTag("customers")
   revalidateTag(cacheTag)
@@ -60,7 +59,7 @@ export const updateCustomer = async (body: HttpTypes.StoreUpdateCustomer) => {
   return updateRes
 }
 
-export async function signup(formData: FormData) {
+export async function signup(_currentState: unknown, formData: FormData) {
   const password = formData.get("password") as string
   const customerForm = {
     email: formData.get("email") as string,
@@ -105,7 +104,7 @@ export async function signup(formData: FormData) {
   }
 }
 
-export async function login(formData: FormData) {
+export async function login(_currentState: unknown, formData: FormData) {
   const email = formData.get("email") as string
   const password = formData.get("password") as string
 
@@ -128,7 +127,7 @@ export async function login(formData: FormData) {
   }
 }
 
-export async function signout() {
+export async function signout(countryCode: string) {
   await sdk.auth.logout()
 
   await removeAuthToken()
@@ -140,7 +139,8 @@ export async function signout() {
 
   const cartCacheTag = await getCacheTag("carts")
   revalidateTag(cartCacheTag)
-  redirect(`/`)
+
+  redirect(`/${countryCode}/account`)
 }
 
 export async function transferCart() {
@@ -158,20 +158,26 @@ export async function transferCart() {
   revalidateTag(cartCacheTag)
 }
 
-export const addCustomerAddress = async (formData: FormData): Promise<any> => {
+export const addCustomerAddress = async (
+  currentState: Record<string, unknown>,
+  formData: FormData
+): Promise<any> => {
+  const isDefaultBilling = (currentState.isDefaultBilling as boolean) || false
+  const isDefaultShipping = (currentState.isDefaultShipping as boolean) || false
+
   const address = {
-    address_name: formData.get("address_name") as string,
     first_name: formData.get("first_name") as string,
     last_name: formData.get("last_name") as string,
     company: formData.get("company") as string,
     address_1: formData.get("address_1") as string,
+    address_2: formData.get("address_2") as string,
     city: formData.get("city") as string,
     postal_code: formData.get("postal_code") as string,
+    province: formData.get("province") as string,
     country_code: formData.get("country_code") as string,
     phone: formData.get("phone") as string,
-    province: formData.get("province") as string,
-    is_default_billing: Boolean(formData.get("isDefaultBilling")),
-    is_default_shipping: Boolean(formData.get("isDefaultShipping")),
+    is_default_billing: isDefaultBilling,
+    is_default_shipping: isDefaultShipping,
   }
 
   const headers = {
@@ -210,16 +216,17 @@ export const deleteCustomerAddress = async (
 }
 
 export const updateCustomerAddress = async (
+  currentState: Record<string, unknown>,
   formData: FormData
 ): Promise<any> => {
-  const addressId = formData.get("addressId") as string
+  const addressId =
+    (currentState.addressId as string) || (formData.get("addressId") as string)
 
   if (!addressId) {
     return { success: false, error: "Address ID is required" }
   }
 
   const address = {
-    address_name: formData.get("address_name") as string,
     first_name: formData.get("first_name") as string,
     last_name: formData.get("last_name") as string,
     company: formData.get("company") as string,
@@ -251,47 +258,4 @@ export const updateCustomerAddress = async (
     .catch((err) => {
       return { success: false, error: err.toString() }
     })
-}
-
-export const updateCustomerPassword = async (
-  password: string,
-  token: string
-): Promise<any> => {
-  const res = await fetch(
-    `${process.env.MEDUSA_BACKEND_URL}/auth/customer/emailpass/update`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ password }),
-    }
-  )
-    .then(async () => {
-      await removeAuthToken()
-      const customerCacheTag = await getCacheTag("customers")
-      revalidateTag(customerCacheTag)
-      return { success: true, error: null }
-    })
-    .catch((err: any) => {
-      return { success: false, error: err.toString() }
-    })
-
-  return res
-}
-
-export const sendResetPasswordEmail = async (email: string) => {
-  const res = await sdk.auth
-    .resetPassword("customer", "emailpass", {
-      identifier: email,
-    })
-    .then(() => {
-      return { success: true, error: null }
-    })
-    .catch((err: any) => {
-      return { success: false, error: err.toString() }
-    })
-
-  return res
 }
