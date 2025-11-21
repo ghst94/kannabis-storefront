@@ -2,7 +2,7 @@
 
 import PaymentButton from "./PaymentButton"
 import { CartItems } from "./CartItems"
-import { CartSummary } from "@/components/organisms"
+import { CartSummary } from "@/components/organisms/CartSummary/CartSummary"
 
 const Review = ({ cart }: { cart: any }) => {
   const paidByGiftcard =

@@ -1,7 +1,7 @@
 "use client"
 
 import { HttpTypes } from "@medusajs/types"
-import { AlgoliaProductSidebar } from "@/components/organisms/AlgoliaProductSidebar/AlgoliaProductSidebar"
+import { AlgoliaProductSidebar } from "@/components/organisms/ProductSidebar/AlgoliaProductSidebar"
 import { ProductCard } from "@/components/organisms/ProductCard/ProductCard"
 import { ProductListingActiveFilters } from "@/components/organisms/ProductListingActiveFilters/ProductListingActiveFilters"
 import { ProductsPagination } from "@/components/organisms/ProductsPagination/ProductsPagination"
